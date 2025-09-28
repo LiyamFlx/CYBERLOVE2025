@@ -3,189 +3,873 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Zotal Business Plan 2025–2026</title>
+  <title>Zotal Business Plan 2025-2026</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;900&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Inter', sans-serif; margin: 0; background: #F8FAFC; overflow: hidden; }
-    .presentation-container { width: 100%; height: 100vh; position: relative; }
-    .slide { width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 0.6s ease; pointer-events: none; padding: 3rem 2rem; overflow-y: auto; }
-    .slide.active { opacity: 1; pointer-events: auto; position: relative; }
-    .title-slide { background: linear-gradient(135deg, #1D2B78, #14205A); color: white; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-    h1, h2 { font-weight: 800; }
-    .content-card { max-width: 960px; margin: auto; background: white; border-radius: 1rem; box-shadow: 0 10px 25px rgba(0,0,0,0.1); padding: 2rem; }
-    .content-list { list-style-type: disc; padding-left: 1.25rem; }
+    /* Custom CSS is minimized, focusing on transition and base layout */
+    body { font-family: 'Inter', sans-serif; margin: 0; background-color: #F8FAFC; }
+
+    /* The main container should fill the viewport height */
+    .presentation-container {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    /* Individual slide styling for transition */
+    .slide {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+      pointer-events: none;
+      overflow-y: auto;
+      display: flex; /* Make slides flexible to center content */
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding-top: 2rem; /* Ensure content is not hidden by nav */
+    }
+
+    /* Active slide styling */
+    .slide.active {
+      opacity: 1;
+      pointer-events: auto;
+      position: relative; /* When active, take up space for flex-grow */
+    }
+
+    /* Title Slide Specifics */
+    .title-slide {
+      background: #1D2B78; /* Deep Zotal Blue */
+      color: white;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 3rem 2rem;
+    }
+
+    /* Styling for the content card */
+    .content-card {
+      max-width: 900px;
+      width: 95%;
+      background: white;
+      border-radius: 1rem;
+      box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.1), 0 5px 10px -5px rgba(0, 0, 0, 0.04);
+      padding: 2.5rem; /* Increased padding for more breathing room */
+      min-height: 70vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Page Footer Styling */
+    .page-footer {
+      border-top: 1px solid #E5E7EB;
+      padding-top: 1.5rem; /* Increased padding */
+      margin-top: auto;
+    }
+
+    /* List styling for content */
+    .content-list {
+      list-style-type: disc;
+      padding-left: 1.5rem;
+      padding-top: 1.5rem;
+    }
+
+    h1 { font-weight: 900; } /* Make titles extra bold */
+    h2 { font-weight: 800; }
   </style>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <!-- Top Navigation -->
-  <div class="absolute top-0 left-0 right-0 p-4 bg-white shadow-md z-10 flex justify-between items-center">
-    <span id="slide-title" class="text-lg font-bold text-gray-700">Zotal Business Plan</span>
-    <div class="flex items-center gap-3">
-      <button onclick="prevSlide()" id="prev-btn" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg">Prev</button>
-      <span id="slide-counter" class="text-sm font-semibold">1 / N</span>
-      <button onclick="nextSlide()" id="next-btn" class="px-4 py-2 bg-[#1D2B78] text-white rounded-lg">Next</button>
+  <!-- Zotal Logo Component (Re-usable for footer) -->
+  <template id="zotal-logo">
+    <div class="flex items-center space-x-2">
+      <!-- Placeholder SVG icon -->
+      <svg class="h-6 w-6 text-[#1D2B78] fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+      </svg>
+      <span class="text-xl font-extrabold text-[#1D2B78]">ZOTAL</span>
     </div>
-  </div>
+  </template>
 
-  <div class="presentation-container pt-16" id="slides-container">
-    
-    <!-- 1. Cover -->
-    <div class="slide active title-slide">
-      <img src="logo.png" class="h-16 mb-6" alt="Zotal Logo">
-      <h1 class="text-5xl md:text-6xl mb-6">Business Plan 2025–2026</h1>
-      <p class="text-xl md:text-2xl mb-8 max-w-3xl">Leading provider of state-of-the-art products for the IVF & Life Sciences market</p>
-      <p class="text-lg font-medium">Dvori Gorodesky – Manager, Fertility & Diagnostic Solutions<br>September 2025</p>
+
+  <div class="presentation-container">
+    <div id="slides-container" class="flex-grow">
+
+      <!-- Slide 1: Title -->
+      <div id="slide-1" class="slide active title-slide">
+        <h1 class="text-6xl md:text-7xl mb-6 tracking-tight">BUSINESS PLAN 2025-2026</h1>
+        <p class="text-xl md:text-2xl mb-12 max-w-2xl font-light">
+          Leading provider of state-of-the-art products for the medical market: IVF and Life Sciences Research
+        </p>
+        <div class="absolute bottom-10">
+          <p class="text-lg font-semibold">Dvori Gorodesky</p>
+          <p class="text-sm opacity-80">Manager, Fertility & Diagnostic Solutions</p>
+        </div>
+      </div>
+
+      <!-- Content Slides (LLM Features added to slides 2-9) -->
+      
+      <!-- Slide 2: Fact Sheet -->
+      <div id="slide-2" class="slide bg-gray-50">
+        <div class="content-card">
+          <h2 class="text-3xl text-[#1D2B78] mb-6 border-b pb-3">Company Fact Sheet</h2>
+          <ul id="content-2" class="content-list text-lg text-gray-700 space-y-3 flex-grow">
+            <li>Established in 1973 – Over <span class="font-bold">50 years of excellence</span></li>
+            <li>20 Professional Staff providing expert support</li>
+            <li>30+ Global Suppliers with exclusive relationships</li>
+            <li><span class="font-bold">Comprehensive Product Portfolio</span> ensuring broad market coverage</li>
+            <li>Focus: Life Sciences Research, In Vitro Diagnostics (IVD), Assisted Reproductive Technology (ART)</li>
+          </ul>
+          <!-- LLM Feature Area -->
+          <div class="mt-6 pt-6 border-t border-gray-100">
+              <div class="flex flex-wrap gap-3 mb-4">
+                  <!-- Existing Pitch Button -->
+                  <button onclick="handleSummaryClick(2)" id="summary-btn-2" class="px-4 py-2 bg-[#1D2B78] text-white rounded-lg hover:bg-[#14205a] transition duration-150 shadow-md flex items-center space-x-2">
+                      <span>✨ Generate Elevator Pitch</span>
+                  </button>
+                  <!-- NEW Diagnostic Button -->
+                  <button onclick="handleDiagnosticClick(2)" id="diagnostic-btn-2" class="px-4 py-2 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition duration-150 shadow-md flex items-center space-x-2">
+                      <span>🧠 Diagnostic Insight</span>
+                  </button>
+              </div>
+
+              <!-- Existing Pitch Result -->
+              <div id="summary-result-2" class="mb-4 p-4 bg-yellow-50 border-l-4 border-yellow-500 text-sm text-gray-700 hidden rounded-lg">
+                  <p id="summary-text-2"></p>
+                  <div id="summary-loading-2" class="hidden flex items-center space-x-2">
+                      <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-[#1D2B78]"></div>
+                      <p>Generating professional summary...</p>
+                  </div>
+              </div>
+
+              <!-- NEW Diagnostic Result (Structured) -->
+              <div id="diagnostic-result-2" class="p-4 bg-blue-50 border-l-4 border-blue-500 text-sm text-gray-700 hidden rounded-lg">
+                  <div id="diagnostic-text-2"></div>
+                  <div id="diagnostic-loading-2" class="hidden flex items-center space-x-2">
+                      <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-pink-600"></div>
+                      <p>Analyzing for actionable insights...</p>
+                  </div>
+              </div>
+          </div>
+          <!-- Footer -->
+          <div class="page-footer flex justify-between items-center text-gray-500">
+            <div id="logo-2"></div>
+            <span class="text-xs font-semibold">2 / 18</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3: Why Zotal -->
+      <div id="slide-3" class="slide bg-gray-50">
+        <div class="content-card">
+          <h2 class="text-3xl text-[#1D2B78] mb-6 border-b pb-3">Why Choose ZOTAL: Our Competitive Edge</h2>
+          <ul id="content-3" class="content-list text-lg grid md:grid-cols-2 gap-x-12 text-gray-700 space-y-3 flex-grow">
+            <li><span class="font-bold">Deep Expertise:</span> Technical, scientific, logistical, and administrative knowledge</li>
+            <li>Current Market Insights & Trend analysis</li>
+            <li>Highly Professional and dedicated personnel</li>
+            <li>Customer-focused service and support</li>
+            <li>Personal relationships built on trust and reliability</li>
+            <li><span class="font-bold">Commitment to Innovation</span> & strong market reputation</li>
+            <li>Reliable, flexible, and efficient logistics chain</li>
+            <li>Rapid response and issue resolution</li>
+          </ul>
+          <!-- LLM Feature Area -->
+          <div class="mt-6 pt-6 border-t border-gray-100">
+              <div class="flex flex-wrap gap-3 mb-4">
+                  <!-- Existing Pitch Button -->
+                  <button onclick="handleSummaryClick(3)" id="summary-btn-3" class="px-4 py-2 bg-[#1D2B78] text-white rounded-lg hover:bg-[#14205a] transition duration-150 shadow-md flex items-center space-x-2">
+                      <span>✨ Generate Elevator Pitch</span>
+                  </button>
+                  <!-- NEW Diagnostic Button -->
+                  <button onclick="handleDiagnosticClick(3)" id="diagnostic-btn-3" class="px-4 py-2 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition duration-150 shadow-md flex items-center space-x-2">
+                      <span>🧠 Diagnostic Insight</span>
+                  </button>
+              </div>
+
+              <!-- Existing Pitch Result -->
+              <div id="summary-result-3" class="mb-4 p-4 bg-yellow-50 border-l-4 border-yellow-500 text-sm text-gray-700 hidden rounded-lg">
+                  <p id="summary-text-3"></p>
+                  <div id="summary-loading-3" class="hidden flex items-center space-x-2">
+                      <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-[#1D2B78]"></div>
+                      <p>Generating professional summary...</p>
+                  </div>
+              </div>
+
+              <!-- NEW Diagnostic Result (Structured) -->
+              <div id="diagnostic-result-3" class="p-4 bg-blue-50 border-l-4 border-blue-500 text-sm text-gray-700 hidden rounded-lg">
+                  <div id="diagnostic-text-3"></div>
+                  <div id="diagnostic-loading-3" class="hidden flex items-center space-x-2">
+                      <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-pink-600"></div>
+                      <p>Analyzing for actionable insights...</p>
+                  </div>
+              </div>
+          </div>
+          <div class="page-footer flex justify-between items-center text-gray-500">
+            <div id="logo-3"></div>
+            <span class="text-xs font-semibold">3 / 18</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 4: Israeli Market -->
+      <div id="slide-4" class="slide bg-gray-50">
+        <div class="content-card">
+          <h2 class="text-3xl text-[#1D2B78] mb-6 border-b pb-3">Israeli Market Landscape (IVF Focus)</h2>
+          <ul id="content-4" class="content-list text-lg text-gray-700 space-y-3 flex-grow">
+            <li>Population of 10M, small geography, personal and tightly-knit market</li>
+            <li>Highly competitive, driven by high-tech and automation adoption</li>
+            <li>Market demands reduced purchasing costs</li>
+            <li>Holds the <span class="font-bold">Highest IVF rate per capita worldwide</span></li>
+            <li>IVF treatments are <span class="font-bold">publicly sponsored</span> until the second child</li>
+            <li>Operating environment impacted by the ongoing security situation</li>
+          </ul>
+          <!-- LLM Feature Area -->
+          <div class="mt-6 pt-6 border-t border-gray-100">
+              <div class="flex flex-wrap gap-3 mb-4">
+                  <!-- Existing Pitch Button -->
+                  <button onclick="handleSummaryClick(4)" id="summary-btn-4" class="px-4 py-2 bg-[#1D2B78] text-white rounded-lg hover:bg-[#14205a] transition duration-150 shadow-md flex items-center space-x-2">
+                      <span>✨ Generate Elevator Pitch</span>
+                  </button>
+                  <!-- NEW Diagnostic Button -->
+                  <button onclick="handleDiagnosticClick(4)" id="diagnostic-btn-4" class="px-4 py-2 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition duration-150 shadow-md flex items-center space-x-2">
+                      <span>🧠 Diagnostic Insight</span>
+                  </button>
+              </div>
+
+              <!-- Existing Pitch Result -->
+              <div id="summary-result-4" class="mb-4 p-4 bg-yellow-50 border-l-4 border-yellow-500 text-sm text-gray-700 hidden rounded-lg">
+                  <p id="summary-text-4"></p>
+                  <div id="summary-loading-4" class="hidden flex items-center space-x-2">
+                      <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-[#1D2B78]"></div>
+                      <p>Generating professional summary...</p>
+                  </div>
+              </div>
+
+              <!-- NEW Diagnostic Result (Structured) -->
+              <div id="diagnostic-result-4" class="p-4 bg-blue-50 border-l-4 border-blue-500 text-sm text-gray-700 hidden rounded-lg">
+                  <div id="diagnostic-text-4"></div>
+                  <div id="diagnostic-loading-4" class="hidden flex items-center space-x-2">
+                      <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-pink-600"></div>
+                      <p>Analyzing for actionable insights...</p>
+                  </div>
+              </div>
+          </div>
+          <div class="page-footer flex justify-between items-center text-gray-500">
+            <div id="logo-4"></div>
+            <span class="text-xs font-semibold">4 / 18</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 5: Fertility Dynamics -->
+      <div id="slide-5" class="slide bg-gray-50">
+        <div class="content-card">
+          <h2 class="text-3xl text-[#1D2B78] mb-6 border-b pb-3">Fertility Market Dynamics & Trends</h2>
+          <ul id="content-5" class="content-list text-lg grid md:grid-cols-2 gap-x-12 text-gray-700 space-y-3 flex-grow">
+            <li>Government initiative to lower cycle load/number of treatments</li>
+            <li>No new IVF labs expected to open in 2025</li>
+            <li>Widespread adoption of <span class="font-bold">Fast Thaw</span> protocols in most labs</li>
+            <li>Embryoscope utilization in almost every cycle (time-lapse monitoring)</li>
+            <li>Preference for single-step culture media</li>
+            <li>Labs typically utilize at least 2 different types of media brands</li>
+            <li><span class="font-bold">ICSI</span> (Intracytoplasmic Sperm Injection) performed in 80% of cycles</li>
+            <li>High adoption of Complete Media solutions</li>
+            <li>Sperm separation devices currently being evaluated for integration</li>
+          </ul>
+          <!-- LLM Feature Area -->
+          <div class="mt-6 pt-6 border-t border-gray-100">
+              <div class="flex flex-wrap gap-3 mb-4">
+                  <!-- Existing Pitch Button -->
+                  <button onclick="handleSummaryClick(5)" id="summary-btn-5" class="px-4 py-2 bg-[#1D2B78] text-white rounded-lg hover:bg-[#14205a] transition duration-150 shadow-md flex items-center space-x-2">
+                      <span>✨ Generate Elevator Pitch</span>
+                  </button>
+                  <!-- NEW Diagnostic Button -->
+                  <button onclick="handleDiagnosticClick(5)" id="diagnostic-btn-5" class="px-4 py-2 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition duration-150 shadow-md flex items-center space-x-2">
+                      <span>🧠 Diagnostic Insight</span>
+                  </button>
+              </div>
+
+              <!-- Existing Pitch Result -->
+              <div id="summary-result-5" class="mb-4 p-4 bg-yellow-50 border-l-4 border-yellow-500 text-sm text-gray-700 hidden rounded-lg">
+                  <p id="summary-text-5"></p>
+                  <div id="summary-loading-5" class="hidden flex items-center space-x-2">
+                      <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-[#1D2B78]"></div>
+                      <p>Generating professional summary...</p>
+                  </div>
+              </div>
+
+              <!-- NEW Diagnostic Result (Structured) -->
+              <div id="diagnostic-result-5" class="p-4 bg-blue-50 border-l-4 border-blue-500 text-sm text-gray-700 hidden rounded-lg">
+                  <div id="diagnostic-text-5"></div>
+                  <div id="diagnostic-loading-5" class="hidden flex items-center space-x-2">
+                      <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-pink-600"></div>
+                      <p>Analyzing for actionable insights...</p>
+                  </div>
+              </div>
+          </div>
+          <div class="page-footer flex justify-between items-center text-gray-500">
+            <div id="logo-5"></div>
+            <span class="text-xs font-semibold">5 / 18</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 6: Fertility Statistics -->
+      <div id="slide-6" class="slide bg-gray-50">
+        <div class="content-card">
+          <h2 class="text-3xl text-[#1D2B78] mb-6 border-b pb-3">Key Fertility Market Statistics</h2>
+          <ul id="content-6" class="content-list text-lg text-gray-700 space-y-3 flex-grow">
+            <li><span class="font-bold">Total IVF Centers:</span> 25 (21 Public, 4 Private)</li>
+            <li>Private centers accounted for ~60% of IVF activity in 2021</li>
+            <li><span class="font-bold">Total Annual Cycles (Projected):</span>
+              <ul class="ml-4 list-circle list-none">
+                <li>• 2023: 62,650 Cycles</li>
+                <li>• 2024: 66,220 Cycles</li>
+              </ul>
+            </li>
+            <li><span class="font-bold">Transfer Types:</span> 55% Fresh Embryo Transfer, 30% Oocyte Freeze</li>
+            <li><span class="font-bold">Transfer Timing:</span> 70% Day 3 Transfers, 30% Day 5 Transfers</li>
+          </ul>
+          <!-- LLM Feature Area -->
+          <div class="mt-6 pt-6 border-t border-gray-100">
+              <div class="flex flex-wrap gap-3 mb-4">
+                  <!-- Existing Pitch Button -->
+                  <button onclick="handleSummaryClick(6)" id="summary-btn-6" class="px-4 py-2 bg-[#1D2B78] text-white rounded-lg hover:bg-[#14205a] transition duration-150 shadow-md flex items-center space-x-2">
+                      <span>✨ Generate Elevator Pitch</span>
+                  </button>
+                  <!-- NEW Diagnostic Button -->
+                  <button onclick="handleDiagnosticClick(6)" id="diagnostic-btn-6" class="px-4 py-2 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition duration-150 shadow-md flex items-center space-x-2">
+                      <span>🧠 Diagnostic Insight</span>
+                  </button>
+              </div>
+
+              <!-- Existing Pitch Result -->
+              <div id="summary-result-6" class="mb-4 p-4 bg-yellow-50 border-l-4 border-yellow-500 text-sm text-gray-700 hidden rounded-lg">
+                  <p id="summary-text-6"></p>
+                  <div id="summary-loading-6" class="hidden flex items-center space-x-2">
+                      <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-[#1D2B78]"></div>
+                      <p>Generating professional summary...</p>
+                  </div>
+              </div>
+
+              <!-- NEW Diagnostic Result (Structured) -->
+              <div id="diagnostic-result-6" class="p-4 bg-blue-50 border-l-4 border-blue-500 text-sm text-gray-700 hidden rounded-lg">
+                  <div id="diagnostic-text-6"></div>
+                  <div id="diagnostic-loading-6" class="hidden flex items-center space-x-2">
+                      <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-pink-600"></div>
+                      <p>Analyzing for actionable insights...</p>
+                  </div>
+              </div>
+          </div>
+          <div class="page-footer flex justify-between items-center text-gray-500">
+            <div id="logo-6"></div>
+            <span class="text-xs font-semibold">6 / 18</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 7: Marketing Plan -->
+      <div id="slide-7" class="slide bg-gray-50">
+        <div class="content-card">
+          <h2 class="text-3xl text-[#1D2B78] mb-6 border-b pb-3">Marketing Plan & Strategic Focus</h2>
+          <ul id="content-7" class="content-list text-lg text-gray-700 space-y-3 flex-grow">
+            <li>Accelerate regulatory approval for the <span class="font-bold">Fast Warm Vit Kit</span> launch</li>
+            <li>Maintain strong support for all 25 IVF clinics in Israel</li>
+            <li>Sustained engagement through calls, e-blasts, visits, and personal meetings</li>
+            <li>Target key stakeholders: <span class="font-bold">Lab Directors, Clinicians, and Purchasing Departments</span></li>
+            <li>Host high-impact scientific workshops featuring Irvine's <span class="font-bold">Key Opinion Leaders (KOLs)</span></li>
+            <li>Dedicated campaign to promote vitrification media</li>
+            <li>Drive increased user adoption and usage volume across the portfolio</li>
+          </ul>
+          <!-- LLM Feature Area -->
+          <div class="mt-6 pt-6 border-t border-gray-100">
+              <div class="flex flex-wrap gap-3 mb-4">
+                  <!-- Existing Pitch Button -->
+                  <button onclick="handleSummaryClick(7)" id="summary-btn-7" class="px-4 py-2 bg-[#1D2B78] text-white rounded-lg hover:bg-[#14205a] transition duration-150 shadow-md flex items-center space-x-2">
+                      <span>✨ Generate Elevator Pitch</span>
+                  </button>
+                  <!-- NEW Diagnostic Button -->
+                  <button onclick="handleDiagnosticClick(7)" id="diagnostic-btn-7" class="px-4 py-2 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition duration-150 shadow-md flex items-center space-x-2">
+                      <span>🧠 Diagnostic Insight</span>
+                  </button>
+              </div>
+
+              <!-- Existing Pitch Result -->
+              <div id="summary-result-7" class="mb-4 p-4 bg-yellow-50 border-l-4 border-yellow-500 text-sm text-gray-700 hidden rounded-lg">
+                  <p id="summary-text-7"></p>
+                  <div id="summary-loading-7" class="hidden flex items-center space-x-2">
+                      <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-[#1D2B78]"></div>
+                      <p>Generating professional summary...</p>
+                  </div>
+              </div>
+
+              <!-- NEW Diagnostic Result (Structured) -->
+              <div id="diagnostic-result-7" class="p-4 bg-blue-50 border-l-4 border-blue-500 text-sm text-gray-700 hidden rounded-lg">
+                  <div id="diagnostic-text-7"></div>
+                  <div id="diagnostic-loading-7" class="hidden flex items-center space-x-2">
+                      <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-pink-600"></div>
+                      <p>Analyzing for actionable insights...</p>
+                  </div>
+              </div>
+          </div>
+          <div class="page-footer flex justify-between items-center text-gray-500">
+            <div id="logo-7"></div>
+            <span class="text-xs font-semibold">7 / 18</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 8: Events -->
+      <div id="slide-8" class="slide bg-gray-50">
+        <div class="content-card">
+          <h2 class="text-3xl text-[#1D2B78] mb-6 border-b pb-3">Educational Events & Trade Shows Calendar</h2>
+          <ul id="content-8" class="content-list text-lg grid md:grid-cols-2 gap-x-12 text-gray-700 space-y-3 flex-grow">
+            <li>Participation in Professional Congresses (Local & International)</li>
+            <li>Israeli annual fertility meeting – <span class="font-bold">AYALA</span></li>
+            <li>European Society of Human Reproduction and Embryology (<span class="font-bold">ESHRE</span>)</li>
+            <li>Alpha Scientists in Reproductive Medicine (<span class="font-bold">Alpha</span>)</li>
+            <li>Targeted Group meetings with pharmacy company partners</li>
+          </ul>
+          <!-- LLM Feature Area -->
+          <div class="mt-6 pt-6 border-t border-gray-100">
+              <div class="flex flex-wrap gap-3 mb-4">
+                  <!-- Existing Pitch Button -->
+                  <button onclick="handleSummaryClick(8)" id="summary-btn-8" class="px-4 py-2 bg-[#1D2B78] text-white rounded-lg hover:bg-[#14205a] transition duration-150 shadow-md flex items-center space-x-2">
+                      <span>✨ Generate Elevator Pitch</span>
+                  </button>
+                  <!-- NEW Diagnostic Button -->
+                  <button onclick="handleDiagnosticClick(8)" id="diagnostic-btn-8" class="px-4 py-2 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition duration-150 shadow-md flex items-center space-x-2">
+                      <span>🧠 Diagnostic Insight</span>
+                  </button>
+              </div>
+
+              <!-- Existing Pitch Result -->
+              <div id="summary-result-8" class="mb-4 p-4 bg-yellow-50 border-l-4 border-yellow-500 text-sm text-gray-700 hidden rounded-lg">
+                  <p id="summary-text-8"></p>
+                  <div id="summary-loading-8" class="hidden flex items-center space-x-2">
+                      <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-[#1D2B78]"></div>
+                      <p>Generating professional summary...</p>
+                  </div>
+              </div>
+
+              <!-- NEW Diagnostic Result (Structured) -->
+              <div id="diagnostic-result-8" class="p-4 bg-blue-50 border-l-4 border-blue-500 text-sm text-gray-700 hidden rounded-lg">
+                  <div id="diagnostic-text-8"></div>
+                  <div id="diagnostic-loading-8" class="hidden flex items-center space-x-2">
+                      <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-pink-600"></div>
+                      <p>Analyzing for actionable insights...</p>
+                  </div>
+              </div>
+          </div>
+          <div class="page-footer flex justify-between items-center text-gray-500">
+            <div id="logo-8"></div>
+            <span class="text-xs font-semibold">8 / 18</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 9: Opportunity -->
+      <div id="slide-9" class="slide bg-gray-50">
+        <div class="content-card">
+          <h2 class="text-3xl text-[#1D2B78] mb-6 border-b pb-3">Your Opportunity with ZOTAL</h2>
+          <ul id="content-9" class="content-list text-lg text-gray-700 space-y-3 flex-grow">
+            <li><span class="font-bold">Complete Market Presence</span> in the IVF and Life Sciences sector</li>
+            <li><span class="font-bold">Specific, Dedicated Market Focus</span> ensuring expertise and attention</li>
+            <li><span class="font-bold">Owned Distribution and Storage Solution</span> guaranteeing supply chain reliability</li>
+            <li><span class="font-bold">Authorization Model</span> positioning Zotal as the central hub</li>
+            <li>Commitment to <span class="font-bold">Reliable Long-Term Relations</span> built on trust and performance</li>
+          </ul>
+          <!-- LLM Feature Area -->
+          <div class="mt-6 pt-6 border-t border-gray-100">
+              <div class="flex flex-wrap gap-3 mb-4">
+                  <!-- Existing Pitch Button -->
+                  <button onclick="handleSummaryClick(9)" id="summary-btn-9" class="px-4 py-2 bg-[#1D2B78] text-white rounded-lg hover:bg-[#14205a] transition duration-150 shadow-md flex items-center space-x-2">
+                      <span>✨ Generate Elevator Pitch</span>
+                  </button>
+                  <!-- NEW Diagnostic Button -->
+                  <button onclick="handleDiagnosticClick(9)" id="diagnostic-btn-9" class="px-4 py-2 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition duration-150 shadow-md flex items-center space-x-2">
+                      <span>🧠 Diagnostic Insight</span>
+                  </button>
+              </div>
+
+              <!-- Existing Pitch Result -->
+              <div id="summary-result-9" class="mb-4 p-4 bg-yellow-50 border-l-4 border-yellow-500 text-sm text-gray-700 hidden rounded-lg">
+                  <p id="summary-text-9"></p>
+                  <div id="summary-loading-9" class="hidden flex items-center space-x-2">
+                      <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-[#1D2B78]"></div>
+                      <p>Generating professional summary...</p>
+                  </div>
+              </div>
+
+              <!-- NEW Diagnostic Result (Structured) -->
+              <div id="diagnostic-result-9" class="p-4 bg-blue-50 border-l-4 border-blue-500 text-sm text-gray-700 hidden rounded-lg">
+                  <div id="diagnostic-text-9"></div>
+                  <div id="diagnostic-loading-9" class="hidden flex items-center space-x-2">
+                      <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-pink-600"></div>
+                      <p>Analyzing for actionable insights...</p>
+                  </div>
+              </div>
+          </div>
+          <div class="page-footer flex justify-between items-center text-gray-500">
+            <div id="logo-9"></div>
+            <span class="text-xs font-semibold">9 / 18</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 10: Current Business (Placeholder - no LLM button needed here) -->
+      <div id="slide-10" class="slide bg-gray-50">
+        <div class="content-card flex-grow flex flex-col justify-center items-center text-center">
+          <h2 class="text-3xl text-[#1D2B78] mb-6 border-b pb-3 w-full">ZOTAL Current Business Performance</h2>
+          <div class="flex-grow flex flex-col justify-center items-center w-full">
+             <span class="text-6xl mb-4 text-gray-400">📊</span>
+             <p class="text-2xl text-gray-500 italic font-light max-w-md">
+               -- Placeholder for detailed charts, graphs, and financial summary --
+             </p>
+          </div>
+          <div class="page-footer flex justify-between items-center text-gray-500 w-full">
+            <div id="logo-10"></div>
+            <span class="text-xs font-semibold">10 / 18</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 11: Thank You -->
+      <div id="slide-11" class="slide flex flex-col justify-center items-center text-center bg-gray-50">
+        <div class="content-card flex-grow flex flex-col justify-center items-center">
+          <h2 class="text-5xl md:text-6xl text-[#1D2B78] mb-6 tracking-tight">THANK YOU</h2>
+          <p class="text-xl md:text-2xl text-gray-600 mb-2">Dvori Gorodesky</p>
+          <p class="text-lg text-gray-500">Manager, Fertility & Diagnostic Solutions</p>
+        </div>
+      </div>
+      
+      <!-- Image Slides (Dark Background for Visual Impact) -->
+      <div id="slide-12" class="slide title-slide">
+        <h2 class="text-4xl text-white mb-4">🔬 Cell Analysis / R&D Focus</h2>
+        <p class="text-lg font-light">Detailed visual representation of our life science solutions.</p>
+      </div>
+      <div id="slide-13" class="slide title-slide">
+        <h2 class="text-4xl text-white mb-4">🧬 Genetics & Diagnostics Portfolio</h2>
+        <p class="text-lg font-light">Innovation in genomic research tools.</p>
+      </div>
+      <div id="slide-14" class="slide title-slide">
+        <h2 class="text-4xl text-white mb-4">🔬 Advanced Microscopy Solutions</h2>
+        <p class="text-lg font-light">High-resolution imaging for lab environments.</p>
+      </div>
+      <div id="slide-15" class="slide title-slide">
+        <h2 class="text-4xl text-white mb-4">👶 IVF Lab Solutions</h2>
+        <p class="text-lg font-light">Complete product line for Assisted Reproductive Technology.</p>
+      </div>
+      <div id="slide-16" class="slide title-slide">
+        <h2 class="text-4xl text-white mb-4">🧪 Organoid & Kidney Research</h2>
+        <p class="text-lg font-light">Cutting-edge models and consumables.</p>
+      </div>
+      <div id="slide-17" class="slide title-slide">
+        <h2 class="text-4xl text-white mb-4">🧪 Life Science Research Tools</h2>
+        <p class="text-lg font-light">Supporting complex biological investigations.</p>
+      </div>
+      <div id="slide-18" class="slide title-slide">
+        <h2 class="text-4xl text-white mb-4">🛡️ RI Witness/Traceability Solutions</h2>
+        <p class="text-lg font-light">Ensuring safety and chain of custody in the lab.</p>
+      </div>
+
+
     </div>
 
-    <!-- 2. Company Overview -->
-    <div class="slide">
-      <div class="content-card">
-        <h2 class="text-3xl text-[#1D2B78] mb-4">Company Overview</h2>
-        <ul class="content-list text-gray-700 space-y-2">
-          <li>Founded in 1973 – Over 50 years of excellence</li>
-          <li>20 trained professional staff</li>
-          <li>30+ global suppliers with exclusive relations</li>
-          <li>Focus: Life Sciences, IVD, ART</li>
-          <li>Certifications: ISO 9001:2015, ISO 27001, ISO 27799</li>
-        </ul>
+    <!-- Navigation Bar -->
+    <div class="h-16 p-3 bg-white border-t border-gray-200 flex justify-center items-center shadow-2xl sticky bottom-0 z-10">
+      <div class="flex justify-between items-center w-full max-w-xl">
+        <button id="prev-btn" onclick="changeSlide(-1)" class="flex items-center space-x-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition duration-150 shadow-md">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+          <span class="hidden sm:inline font-medium">Previous Slide</span>
+        </button>
+        
+        <span id="page-indicator" class="text-sm font-bold text-gray-600 px-4 py-1 bg-gray-100 rounded-full shadow-inner">Slide 1 / 18</span>
+        
+        <button id="next-btn" onclick="changeSlide(1)" class="flex items-center space-x-2 px-4 py-2 bg-[#1D2B78] text-white rounded-lg hover:bg-[#14205a] transition duration-150 shadow-md">
+          <span class="hidden sm:inline font-medium">Next Slide</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+        </button>
       </div>
     </div>
-
-    <!-- 3. Why Zotal -->
-    <div class="slide">
-      <div class="content-card">
-        <h2 class="text-3xl text-[#1D2B78] mb-4">Why Zotal?</h2>
-        <ul class="content-list text-gray-700 space-y-2">
-          <li>Deep knowledge: technical, scientific, logistical</li>
-          <li>Professional, customer-focused team</li>
-          <li>Innovation & market reputation</li>
-          <li>Personal trust-based relationships</li>
-          <li>Reliable logistics, flexible fast response</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- 4. Israeli Market -->
-    <div class="slide">
-      <div class="content-card">
-        <h2 class="text-3xl text-[#1D2B78] mb-4">Israeli Market Landscape</h2>
-        <ul class="content-list text-gray-700 space-y-2">
-          <li>Population 10M, small geography</li>
-          <li>High-tech & automation environment</li>
-          <li>Competitive, reduced purchasing costs</li>
-          <li>Highest IVF rate per capita globally</li>
-          <li>Government sponsors IVF up to 2nd child</li>
-          <li>Ongoing 2-year war affecting operations</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- 5. Fertility Dynamics -->
-    <div class="slide">
-      <div class="content-card">
-        <h2 class="text-3xl text-[#1D2B78] mb-4">Fertility Market Dynamics</h2>
-        <ul class="content-list text-gray-700 space-y-2">
-          <li>Embryoscope used in every cycle</li>
-          <li>ICSI applied in 80% of cycles</li>
-          <li>Single-step & complete media widely adopted</li>
-          <li>Fast Thaw common practice</li>
-          <li>Labs work with ≥2 media types</li>
-          <li>Sperm separation devices under evaluation</li>
-          <li>No new IVF labs opened in 2025</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- 6. Market Statistics -->
-    <div class="slide">
-      <div class="content-card">
-        <h2 class="text-3xl text-[#1D2B78] mb-4">Fertility Market Statistics</h2>
-        <ul class="content-list text-gray-700 space-y-2">
-          <li>25 IVF Centers – 21 Public, 4 Private (60% procedures)</li>
-          <li>Total Cycles: 62,650 (2023) → 66,220 (2024)</li>
-          <li>Transfers: 70% Day 3, 30% Day 5</li>
-          <li>55% Fresh transfers, 30% Oocyte freeze</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- 7. Marketing Focus -->
-    <div class="slide">
-      <div class="content-card">
-        <h2 class="text-3xl text-[#1D2B78] mb-4">Marketing Plan & Focus</h2>
-        <ul class="content-list text-gray-700 space-y-2">
-          <li>Launch Fast Warm Vit Kit (pending regulatory approval)</li>
-          <li>Campaign for Vit Media</li>
-          <li>Scientific workshops with Irvine KOL experts</li>
-          <li>Support all IVF clinics in Israel</li>
-          <li>Continue calls, e-blasts, visits, meetings</li>
-          <li>Expand user adoption & usage volume</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- 8. Events -->
-    <div class="slide">
-      <div class="content-card">
-        <h2 class="text-3xl text-[#1D2B78] mb-4">Educational Events & Trade Shows</h2>
-        <ul class="content-list text-gray-700 space-y-2">
-          <li>Local & international congresses</li>
-          <li>Israeli Annual Fertility Meeting (AYALA)</li>
-          <li>ESHRE & Alpha conferences</li>
-          <li>Group meetings with pharma companies</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- 9. Summary -->
-    <div class="slide">
-      <div class="content-card">
-        <h2 class="text-3xl text-[#1D2B78] mb-4">Summary & Opportunity</h2>
-        <ul class="content-list text-gray-700 space-y-2">
-          <li>Enhanced distribution & full market presence</li>
-          <li>IVF & Life Sciences specialization</li>
-          <li>Proprietary distribution & storage solutions</li>
-          <li>Regulatory authorization secured</li>
-          <li>Reliable, long-term relationships</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- 10. Current Business -->
-    <div class="slide">
-      <div class="content-card">
-        <h2 class="text-3xl text-[#1D2B78] mb-4">Zotal Current Business</h2>
-        <p class="text-gray-700 italic">[Placeholder for charts and financial data]</p>
-      </div>
-    </div>
-
-    <!-- 11. Commitment -->
-    <div class="slide">
-      <div class="content-card">
-        <h2 class="text-3xl text-[#1D2B78] mb-4">Commitment to Excellence</h2>
-        <p class="text-gray-700">Zotal is committed to continuous innovation, reliable logistics, and customer-centric solutions supporting Israel’s IVF and Life Sciences ecosystem.</p>
-      </div>
-    </div>
-
-    <!-- 12. Thank You -->
-    <div class="slide title-slide">
-      <h1 class="text-5xl md:text-6xl mb-6">Thank You</h1>
-      <p class="text-xl md:text-2xl font-light">Questions?</p>
-      <img src="logo.png" alt="Zotal Logo" class="h-12 mt-6">
-    </div>
-
   </div>
 
   <script>
+    // Constants and DOM elements
     const slides = document.querySelectorAll('.slide');
-    let current = 0;
-    function updateSlide(){slides.forEach(s=>s.classList.remove('active'));slides[current].classList.add('active');document.getElementById('slide-counter').textContent=`${current+1} / ${slides.length}`;let title=slides[current].querySelector('h2,h1');document.getElementById('slide-title').textContent=title?title.textContent:'Zotal';document.getElementById('prev-btn').disabled=current===0;document.getElementById('next-btn').disabled=current===slides.length-1;}
-    function nextSlide(){if(current<slides.length-1){current++;updateSlide();}}
-    function prevSlide(){if(current>0){current--;updateSlide();}}
-    document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')nextSlide();if(e.key==='ArrowLeft')prevSlide();});
-    updateSlide();
+    let currentSlideIndex = 0;
+    const totalSlides = slides.length;
+    const pageIndicator = document.getElementById('page-indicator');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const logoTemplate = document.getElementById('zotal-logo');
+
+    // --- Gemini API Configuration for LLM Feature ---
+    const API_URL_BASE = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent';
+    const API_KEY = ""; // This will be provided by the Canvas environment at runtime
+
+    // System prompt for the Elevator Pitch button
+    const SYSTEM_PROMPT_PITCH = "You are a professional business analyst presenting a slide deck. Summarize the following bullet points into a concise, persuasive, single paragraph elevator pitch (max 4 sentences). Focus on impact and key takeaways for a high-level executive audience.";
+
+    // System prompt for the new Diagnostic Insight button, specifically asking for structured output.
+    const SYSTEM_PROMPT_DIAGNOSTIC = "You are a specialized business consultant for the medical device and life sciences industry, focusing on Fertility, IVD, and ART. Analyze the provided slide content and title. Generate three distinct, actionable 'Diagnostic Insights' categorized by timeline: Short-Term (next 3-6 months), Mid-Term (6-18 months), and Long-Term (18-36 months). The response MUST be a JSON object conforming to the provided schema.";
+    
+    // JSON Schema to enforce the structure for the Diagnostic Insight
+    const DIAGNOSTIC_SCHEMA = {
+        type: "OBJECT",
+        properties: {
+            "shortTerm": { "type": "STRING", "description": "Immediate, tactical insight or action (3-6 months)." },
+            "midTerm": { "type": "STRING", "description": "Strategic and implementation-focused insight (6-18 months)." },
+            "longTerm": { "type": "STRING", "description": "Visionary, market-shaping insight (18-36 months)." }
+        },
+        propertyOrdering: ["shortTerm", "midTerm", "longTerm"]
+    };
+
+
+    // Function to safely extract text from the content UL of the current slide
+    function getSlideContentText(slideIndex) {
+        const ul = document.getElementById(`content-${slideIndex}`);
+        if (!ul) return "";
+
+        // Grab all list item texts and join them. We clean up the bolding spans.
+        const listItems = Array.from(ul.querySelectorAll('li'));
+        return listItems.map(li => li.textContent.trim()).join('\n- ');
+    }
+
+    // Function to handle the LLM API call with exponential backoff
+    // Now accepts the system prompt and optional schema
+    async function callGeminiApi(prompt, systemPromptOverride, responseSchema = null) {
+        const payload = {
+            contents: [{ parts: [{ text: prompt }] }],
+            systemInstruction: { parts: [{ text: systemPromptOverride }] },
+        };
+        
+        if (responseSchema) {
+             payload.generationConfig = {
+                responseMimeType: "application/json",
+                responseSchema: responseSchema
+            };
+        }
+
+        const maxRetries = 3;
+        let delay = 1000;
+
+        for (let i = 0; i < maxRetries; i++) {
+            try {
+                const url = `${API_URL_BASE}?key=${API_KEY}`;
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    if (response.status >= 500) throw new Error(`Server Error: ${response.status}`);
+                    throw new Error(`API Error: ${response.statusText}`);
+                }
+
+                const result = await response.json();
+                
+                // For JSON structured output, the result text is the raw JSON string
+                const rawText = result.candidates?.[0]?.content?.parts?.[0]?.text;
+                
+                if (rawText) return rawText;
+                throw new Error("Invalid response structure or missing text from API.");
+
+            } catch (error) {
+                console.error(`Attempt ${i + 1} failed:`, error.message);
+                if (i === maxRetries - 1) throw new Error("Failed to generate content after multiple retries.");
+                await new Promise(resolve => setTimeout(resolve, delay));
+                delay *= 2; // Exponential backoff
+            }
+        }
+    }
+
+    // Main handler for the Generate Summary button click (Elevator Pitch)
+    async function handleSummaryClick(slideNumber) {
+        const btn = document.getElementById(`summary-btn-${slideNumber}`);
+        const resultDiv = document.getElementById(`summary-result-${slideNumber}`);
+        const resultText = document.getElementById(`summary-text-${slideNumber}`);
+        const loadingDiv = document.getElementById(`summary-loading-${slideNumber}`);
+        const ulContent = getSlideContentText(slideNumber);
+        const slideTitle = document.querySelector(`#slide-${slideNumber} h2`).textContent;
+        
+        // Hide the other result div when starting a new generation
+        document.getElementById(`diagnostic-result-${slideNumber}`).classList.add('hidden');
+
+        if (!ulContent) {
+            resultText.textContent = "Error: Could not find content to summarize.";
+            resultDiv.classList.remove('hidden');
+            resultDiv.classList.remove('bg-yellow-50', 'border-yellow-500', 'bg-green-50', 'border-green-500');
+            resultDiv.classList.add('bg-red-50', 'border-red-500');
+            return;
+        }
+
+        // 1. Show Loading State
+        resultDiv.classList.remove('hidden');
+        resultText.classList.add('hidden');
+        loadingDiv.classList.remove('hidden');
+        btn.disabled = true;
+        btn.innerHTML = `<div class="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div> Generating...`;
+        
+        // Construct the full prompt
+        const prompt = `Based on the slide titled: "${slideTitle}", summarize the following key points:\n\n- ${ulContent}`;
+
+        try {
+            // 2. Call the API using the Pitch system prompt
+            const summary = await callGeminiApi(prompt, SYSTEM_PROMPT_PITCH);
+            
+            // 3. Display Result
+            resultText.textContent = summary;
+            resultText.classList.remove('hidden');
+            resultDiv.classList.remove('bg-yellow-50', 'border-yellow-500', 'bg-red-50', 'border-red-500');
+            resultDiv.classList.add('bg-green-50', 'border-green-500');
+            
+        } catch (error) {
+            // 4. Handle Error
+            console.error("Gemini API call failed for Pitch:", error);
+            resultText.textContent = `Sorry, failed to generate summary: ${error.message}`;
+            resultText.classList.remove('hidden');
+            resultDiv.classList.remove('bg-yellow-50', 'border-yellow-500', 'bg-green-50', 'border-green-500');
+            resultDiv.classList.add('bg-red-50', 'border-red-500');
+
+        } finally {
+            // 5. Reset UI
+            loadingDiv.classList.add('hidden');
+            btn.disabled = false;
+            btn.innerHTML = `<span>✨ Generate Elevator Pitch</span>`;
+        }
+    }
+    
+    // Main handler for the Generate Diagnostic button click (Now structured JSON output)
+    async function handleDiagnosticClick(slideNumber) {
+        const btn = document.getElementById(`diagnostic-btn-${slideNumber}`);
+        const resultDiv = document.getElementById(`diagnostic-result-${slideNumber}`);
+        const resultTextDiv = document.getElementById(`diagnostic-text-${slideNumber}`);
+        const loadingDiv = document.getElementById(`diagnostic-loading-${slideNumber}`);
+        const ulContent = getSlideContentText(slideNumber);
+        const slideTitle = document.querySelector(`#slide-${slideNumber} h2`).textContent;
+        
+        // Hide the other result div when starting a new generation
+        document.getElementById(`summary-result-${slideNumber}`).classList.add('hidden');
+
+        if (!ulContent) {
+            resultTextDiv.innerHTML = "Error: Could not find content to analyze.";
+            resultDiv.classList.remove('hidden');
+            resultDiv.classList.remove('bg-blue-50', 'border-blue-500', 'bg-green-50', 'border-green-500');
+            resultDiv.classList.add('bg-red-50', 'border-red-500');
+            return;
+        }
+
+        // 1. Show Loading State
+        resultDiv.classList.remove('hidden');
+        resultTextDiv.classList.add('hidden');
+        loadingDiv.classList.remove('hidden');
+        btn.disabled = true;
+        btn.innerHTML = `<div class="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div> Analyzing...`;
+        
+        // Construct the full prompt
+        const prompt = `Slide Title: "${slideTitle}". Key points for strategic analysis:\n\n- ${ulContent}`;
+
+        try {
+            // 2. Call the API using the specialized diagnostic system prompt and structured config
+            const rawJson = await callGeminiApi(prompt, SYSTEM_PROMPT_DIAGNOSTIC, DIAGNOSTIC_SCHEMA);
+            const insights = JSON.parse(rawJson);
+            
+            // 3. Display Result - formatted to show the time horizons
+            resultTextDiv.innerHTML = `
+                <p class="mb-3"><strong class="text-pink-600">🚀 Short-Term (0-6M):</strong> ${insights.shortTerm}</p>
+                <p class="mb-3"><strong class="text-blue-600">📈 Mid-Term (6-18M):</strong> ${insights.midTerm}</p>
+                <p><strong class="text-green-600">🌟 Long-Term (18M+):</strong> ${insights.longTerm}</p>
+            `;
+
+            resultTextDiv.classList.remove('hidden');
+            resultDiv.classList.remove('bg-blue-50', 'border-blue-500', 'bg-red-50', 'border-red-500');
+            resultDiv.classList.add('bg-green-50', 'border-green-500'); // Use green for success
+            
+        } catch (error) {
+            // 4. Handle Error
+            console.error("Gemini API call failed for Diagnostic:", error);
+            resultTextDiv.innerHTML = `Sorry, failed to generate diagnostic insight. The model returned an error or invalid JSON: ${error.message}`;
+            resultTextDiv.classList.remove('hidden');
+            resultDiv.classList.remove('bg-blue-50', 'border-blue-500', 'bg-green-50', 'border-green-500');
+            resultDiv.classList.add('bg-red-50', 'border-red-500');
+
+        } finally {
+            // 5. Reset UI
+            loadingDiv.classList.add('hidden');
+            btn.disabled = false;
+            btn.innerHTML = `<span>🧠 Diagnostic Insight</span>`;
+        }
+    }
+
+
+    // Function to clone and insert the logo template into the footer of content slides
+    function insertLogo() {
+        const logoTargetIds = ['logo-2', 'logo-3', 'logo-4', 'logo-5', 'logo-6', 'logo-7', 'logo-8', 'logo-9', 'logo-10'];
+        logoTargetIds.forEach(id => {
+            const target = document.getElementById(id);
+            if (target) {
+                target.appendChild(logoTemplate.content.cloneNode(true));
+            }
+        });
+    }
+
+    // Function to update the active slide and navigation state
+    function updateSlide() {
+      // 1. Hide all slides and show only the current one
+      slides.forEach((s, i) => {
+        s.classList.remove('active');
+        if (i === currentSlideIndex) {
+          s.classList.add('active');
+          // Scroll active slide content to top (useful if user scrolled down on a previous slide)
+          s.scrollTop = 0; 
+        }
+      });
+
+      // 2. Update the page indicator text
+      pageIndicator.textContent = `${currentSlideIndex + 1} / ${totalSlides}`;
+
+      // 3. Update navigation button state
+      prevBtn.disabled = currentSlideIndex === 0;
+      nextBtn.disabled = currentSlideIndex === totalSlides - 1;
+      
+      // Update button visual styles
+      prevBtn.classList.toggle('opacity-50', prevBtn.disabled);
+      prevBtn.classList.toggle('hover:bg-gray-200', !prevBtn.disabled);
+      nextBtn.classList.toggle('opacity-50', nextBtn.disabled);
+      nextBtn.classList.toggle('hover:bg-[#14205a]', !nextBtn.disabled);
+    }
+
+    // Function to change the slide index
+    function changeSlide(dir) {
+      const newIndex = currentSlideIndex + dir;
+      if (newIndex >= 0 && newIndex < totalSlides) {
+        currentSlideIndex = newIndex;
+        updateSlide();
+      }
+    }
+
+    // Initialize the presentation on load
+    window.onload = () => {
+        insertLogo(); // Insert the consistent logo into all footers
+        updateSlide();
+    };
+    
+    // Add keyboard navigation (Left/Right arrows)
+    document.addEventListener('keydown', e => {
+      if(e.key==='ArrowRight') changeSlide(1);
+      if(e.key==='ArrowLeft') changeSlide(-1);
+    });
   </script>
 </body>
 </html>
