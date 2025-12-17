@@ -635,33 +635,95 @@
       setTimeout(() => { closeModal(); btn.textContent = 'SEND REQUEST →'; btn.style.background = ''; e.target.reset(); }, 2000);
     };
 
-    // === GENIE ===
-    const CEOs = [
-      { name: "Elon Musk", emoji: "🚀", co: "Tesla/SpaceX", founder: true, glasses: false, american: true, controversial: true, richest: true, bald: false, gaming: false, ai: true, indian: false, female: false, chips: false, social: true },
-      { name: "Tim Cook", emoji: "🍎", co: "Apple", founder: false, glasses: true, american: true, controversial: false, richest: false, bald: false, gaming: false, ai: false, indian: false, female: false, chips: true, social: false },
-      { name: "Satya Nadella", emoji: "🪟", co: "Microsoft", founder: false, glasses: true, american: false, controversial: false, richest: false, bald: true, gaming: true, ai: true, indian: true, female: false, chips: false, social: false },
-      { name: "Sundar Pichai", emoji: "🔍", co: "Google", founder: false, glasses: false, american: false, controversial: false, richest: false, bald: false, gaming: false, ai: true, indian: true, female: false, chips: false, social: false },
-      { name: "Mark Zuckerberg", emoji: "👤", co: "Meta", founder: true, glasses: false, american: true, controversial: true, richest: true, bald: false, gaming: true, ai: true, indian: false, female: false, chips: false, social: true },
-      { name: "Jensen Huang", emoji: "💚", co: "NVIDIA", founder: true, glasses: false, american: false, controversial: false, richest: true, bald: false, gaming: true, ai: true, indian: false, female: false, chips: true, social: false },
-      { name: "Sam Altman", emoji: "🤖", co: "OpenAI", founder: true, glasses: false, american: true, controversial: true, richest: false, bald: false, gaming: false, ai: true, indian: false, female: false, chips: false, social: true },
-      { name: "Andy Jassy", emoji: "📦", co: "Amazon", founder: false, glasses: false, american: true, controversial: false, richest: false, bald: true, gaming: false, ai: false, indian: false, female: false, chips: false, social: false },
-      { name: "Lisa Su", emoji: "🔴", co: "AMD", founder: false, glasses: false, american: false, controversial: false, richest: false, bald: false, gaming: true, ai: false, indian: false, female: true, chips: true, social: false },
-      { name: "Jack Dorsey", emoji: "⬛", co: "Block", founder: true, glasses: false, american: true, controversial: true, richest: false, bald: false, gaming: false, ai: false, indian: false, female: false, chips: false, social: true },
+    // === CELEBRITY GENIE ===
+    const celebs = [
+      // Actors
+      { name: "Tom Hanks", emoji: "🎬", cat: "Actor", gender: "m", american: true, age: "60+", oscar: true, action: false, comedy: true, marvel: false, british: false, controversial: false, billionaire: false, athlete: false, singer: false, rapper: false, latino: false, asian: false, black: false, royal: false, techie: false, model: false, tiktok: false, kpop: false },
+      { name: "Leonardo DiCaprio", emoji: "🌹", cat: "Actor", gender: "m", american: true, age: "50s", oscar: true, action: true, comedy: false, marvel: false, british: false, controversial: false, billionaire: false, athlete: false, singer: false, rapper: false, latino: false, asian: false, black: false, royal: false, techie: false, model: false, tiktok: false, kpop: false },
+      { name: "Dwayne Johnson", emoji: "💪", cat: "Actor", gender: "m", american: true, age: "50s", oscar: false, action: true, comedy: true, marvel: false, british: false, controversial: false, billionaire: false, athlete: true, singer: false, rapper: false, latino: false, asian: false, black: true, royal: false, techie: false, model: false, tiktok: true, kpop: false },
+      { name: "Scarlett Johansson", emoji: "🖤", cat: "Actor", gender: "f", american: true, age: "30s", oscar: false, action: true, comedy: false, marvel: true, british: false, controversial: false, billionaire: false, athlete: false, singer: false, rapper: false, latino: false, asian: false, black: false, royal: false, techie: false, model: false, tiktok: false, kpop: false },
+      { name: "Tom Cruise", emoji: "✈️", cat: "Actor", gender: "m", american: true, age: "60+", oscar: false, action: true, comedy: false, marvel: false, british: false, controversial: true, billionaire: false, athlete: false, singer: false, rapper: false, latino: false, asian: false, black: false, royal: false, techie: false, model: false, tiktok: false, kpop: false },
+      { name: "Robert Downey Jr.", emoji: "🦾", cat: "Actor", gender: "m", american: true, age: "50s", oscar: true, action: true, comedy: true, marvel: true, british: false, controversial: false, billionaire: false, athlete: false, singer: false, rapper: false, latino: false, asian: false, black: false, royal: false, techie: false, model: false, tiktok: false, kpop: false },
+      { name: "Zendaya", emoji: "🕷️", cat: "Actor", gender: "f", american: true, age: "20s", oscar: false, action: true, comedy: false, marvel: true, british: false, controversial: false, billionaire: false, athlete: false, singer: true, rapper: false, latino: false, asian: false, black: true, royal: false, techie: false, model: true, tiktok: true, kpop: false },
+      { name: "Timothée Chalamet", emoji: "🏜️", cat: "Actor", gender: "m", american: true, age: "20s", oscar: false, action: false, comedy: false, marvel: false, british: false, controversial: false, billionaire: false, athlete: false, singer: false, rapper: false, latino: false, asian: false, black: false, royal: false, techie: false, model: true, tiktok: true, kpop: false },
+      { name: "Emma Watson", emoji: "🪄", cat: "Actor", gender: "f", american: false, age: "30s", oscar: false, action: false, comedy: false, marvel: false, british: true, controversial: false, billionaire: false, athlete: false, singer: false, rapper: false, latino: false, asian: false, black: false, royal: false, techie: false, model: true, tiktok: false, kpop: false },
+      { name: "Jackie Chan", emoji: "🥋", cat: "Actor", gender: "m", american: false, age: "60+", oscar: true, action: true, comedy: true, marvel: false, british: false, controversial: false, billionaire: false, athlete: true, singer: false, rapper: false, latino: false, asian: true, black: false, royal: false, techie: false, model: false, tiktok: false, kpop: false },
+      
+      // Musicians
+      { name: "Taylor Swift", emoji: "🎸", cat: "Musician", gender: "f", american: true, age: "30s", oscar: false, action: false, comedy: false, marvel: false, british: false, controversial: false, billionaire: true, athlete: false, singer: true, rapper: false, latino: false, asian: false, black: false, royal: false, techie: false, model: false, tiktok: true, kpop: false },
+      { name: "Beyoncé", emoji: "🐝", cat: "Musician", gender: "f", american: true, age: "40s", oscar: false, action: false, comedy: false, marvel: false, british: false, controversial: false, billionaire: false, athlete: false, singer: true, rapper: false, latino: false, asian: false, black: true, royal: false, techie: false, model: false, tiktok: false, kpop: false },
+      { name: "Drake", emoji: "🦉", cat: "Musician", gender: "m", american: false, age: "30s", oscar: false, action: false, comedy: false, marvel: false, british: false, controversial: true, billionaire: false, athlete: false, singer: true, rapper: true, latino: false, asian: false, black: true, royal: false, techie: false, model: false, tiktok: true, kpop: false },
+      { name: "Rihanna", emoji: "💎", cat: "Musician", gender: "f", american: false, age: "30s", oscar: false, action: false, comedy: false, marvel: false, british: false, controversial: false, billionaire: true, athlete: false, singer: true, rapper: false, latino: false, asian: false, black: true, royal: false, techie: false, model: true, tiktok: false, kpop: false },
+      { name: "Kanye West", emoji: "🐻", cat: "Musician", gender: "m", american: true, age: "40s", oscar: false, action: false, comedy: false, marvel: false, british: false, controversial: true, billionaire: true, athlete: false, singer: true, rapper: true, latino: false, asian: false, black: true, royal: false, techie: false, model: false, tiktok: false, kpop: false },
+      { name: "Ed Sheeran", emoji: "🎤", cat: "Musician", gender: "m", american: false, age: "30s", oscar: false, action: false, comedy: false, marvel: false, british: true, controversial: false, billionaire: false, athlete: false, singer: true, rapper: false, latino: false, asian: false, black: false, royal: false, techie: false, model: false, tiktok: true, kpop: false },
+      { name: "Adele", emoji: "🎵", cat: "Musician", gender: "f", american: false, age: "30s", oscar: true, action: false, comedy: false, marvel: false, british: true, controversial: false, billionaire: false, athlete: false, singer: true, rapper: false, latino: false, asian: false, black: false, royal: false, techie: false, model: false, tiktok: false, kpop: false },
+      { name: "Bad Bunny", emoji: "🐰", cat: "Musician", gender: "m", american: false, age: "30s", oscar: false, action: false, comedy: false, marvel: false, british: false, controversial: false, billionaire: false, athlete: false, singer: true, rapper: true, latino: true, asian: false, black: false, royal: false, techie: false, model: true, tiktok: true, kpop: false },
+      { name: "BTS Jungkook", emoji: "💜", cat: "Musician", gender: "m", american: false, age: "20s", oscar: false, action: false, comedy: false, marvel: false, british: false, controversial: false, billionaire: false, athlete: false, singer: true, rapper: false, latino: false, asian: true, black: false, royal: false, techie: false, model: true, tiktok: true, kpop: true },
+      { name: "Lady Gaga", emoji: "🎭", cat: "Musician", gender: "f", american: true, age: "30s", oscar: true, action: false, comedy: false, marvel: false, british: false, controversial: false, billionaire: false, athlete: false, singer: true, rapper: false, latino: false, asian: false, black: false, royal: false, techie: false, model: false, tiktok: false, kpop: false },
+      { name: "Billie Eilish", emoji: "🖤", cat: "Musician", gender: "f", american: true, age: "20s", oscar: true, action: false, comedy: false, marvel: false, british: false, controversial: false, billionaire: false, athlete: false, singer: true, rapper: false, latino: false, asian: false, black: false, royal: false, techie: false, model: false, tiktok: true, kpop: false },
+      { name: "Shakira", emoji: "🎶", cat: "Musician", gender: "f", american: false, age: "40s", oscar: false, action: false, comedy: false, marvel: false, british: false, controversial: false, billionaire: false, athlete: false, singer: true, rapper: false, latino: true, asian: false, black: false, royal: false, techie: false, model: false, tiktok: true, kpop: false },
+      { name: "Post Malone", emoji: "🍺", cat: "Musician", gender: "m", american: true, age: "20s", oscar: false, action: false, comedy: false, marvel: false, british: false, controversial: false, billionaire: false, athlete: false, singer: true, rapper: true, latino: false, asian: false, black: false, royal: false, techie: false, model: false, tiktok: true, kpop: false },
+      { name: "Snoop Dogg", emoji: "🌿", cat: "Musician", gender: "m", american: true, age: "50s", oscar: false, action: false, comedy: true, marvel: false, british: false, controversial: true, billionaire: false, athlete: false, singer: true, rapper: true, latino: false, asian: false, black: true, royal: false, techie: false, model: false, tiktok: true, kpop: false },
+      
+      // Athletes
+      { name: "Lionel Messi", emoji: "⚽", cat: "Athlete", gender: "m", american: false, age: "30s", oscar: false, action: false, comedy: false, marvel: false, british: false, controversial: false, billionaire: false, athlete: true, singer: false, rapper: false, latino: true, asian: false, black: false, royal: false, techie: false, model: false, tiktok: true, kpop: false },
+      { name: "Cristiano Ronaldo", emoji: "🇵🇹", cat: "Athlete", gender: "m", american: false, age: "30s", oscar: false, action: false, comedy: false, marvel: false, british: false, controversial: false, billionaire: true, athlete: true, singer: false, rapper: false, latino: false, asian: false, black: false, royal: false, techie: false, model: true, tiktok: true, kpop: false },
+      { name: "LeBron James", emoji: "🏀", cat: "Athlete", gender: "m", american: true, age: "30s", oscar: false, action: false, comedy: false, marvel: false, british: false, controversial: false, billionaire: true, athlete: true, singer: false, rapper: false, latino: false, asian: false, black: true, royal: false, techie: false, model: false, tiktok: true, kpop: false },
+      { name: "Serena Williams", emoji: "🎾", cat: "Athlete", gender: "f", american: true, age: "40s", oscar: false, action: false, comedy: false, marvel: false, british: false, controversial: false, billionaire: false, athlete: true, singer: false, rapper: false, latino: false, asian: false, black: true, royal: false, techie: false, model: false, tiktok: false, kpop: false },
+      { name: "Michael Jordan", emoji: "🏆", cat: "Athlete", gender: "m", american: true, age: "60+", oscar: false, action: false, comedy: false, marvel: false, british: false, controversial: false, billionaire: true, athlete: true, singer: false, rapper: false, latino: false, asian: false, black: true, royal: false, techie: false, model: false, tiktok: false, kpop: false },
+      { name: "Conor McGregor", emoji: "🥊", cat: "Athlete", gender: "m", american: false, age: "30s", oscar: false, action: false, comedy: false, marvel: false, british: false, controversial: true, billionaire: false, athlete: true, singer: false, rapper: false, latino: false, asian: false, black: false, royal: false, techie: false, model: false, tiktok: true, kpop: false },
+      { name: "Lewis Hamilton", emoji: "🏎️", cat: "Athlete", gender: "m", american: false, age: "30s", oscar: false, action: false, comedy: false, marvel: false, british: true, controversial: false, billionaire: false, athlete: true, singer: false, rapper: false, latino: false, asian: false, black: true, royal: false, techie: false, model: true, tiktok: true, kpop: false },
+      { name: "David Beckham", emoji: "⚽", cat: "Athlete", gender: "m", american: false, age: "40s", oscar: false, action: false, comedy: false, marvel: false, british: true, controversial: false, billionaire: false, athlete: true, singer: false, rapper: false, latino: false, asian: false, black: false, royal: false, techie: false, model: true, tiktok: true, kpop: false },
+      
+      // Tech/Business
+      { name: "Elon Musk", emoji: "🚀", cat: "Tech", gender: "m", american: true, age: "50s", oscar: false, action: false, comedy: false, marvel: false, british: false, controversial: true, billionaire: true, athlete: false, singer: false, rapper: false, latino: false, asian: false, black: false, royal: false, techie: true, model: false, tiktok: true, kpop: false },
+      { name: "Mark Zuckerberg", emoji: "👤", cat: "Tech", gender: "m", american: true, age: "40s", oscar: false, action: false, comedy: false, marvel: false, british: false, controversial: true, billionaire: true, athlete: false, singer: false, rapper: false, latino: false, asian: false, black: false, royal: false, techie: true, model: false, tiktok: false, kpop: false },
+      { name: "Jeff Bezos", emoji: "📦", cat: "Tech", gender: "m", american: true, age: "60+", oscar: false, action: false, comedy: false, marvel: false, british: false, controversial: false, billionaire: true, athlete: false, singer: false, rapper: false, latino: false, asian: false, black: false, royal: false, techie: true, model: false, tiktok: false, kpop: false },
+      
+      // Influencers
+      { name: "Kim Kardashian", emoji: "💄", cat: "Influencer", gender: "f", american: true, age: "40s", oscar: false, action: false, comedy: false, marvel: false, british: false, controversial: true, billionaire: true, athlete: false, singer: false, rapper: false, latino: false, asian: false, black: false, royal: false, techie: false, model: true, tiktok: true, kpop: false },
+      { name: "Kylie Jenner", emoji: "👄", cat: "Influencer", gender: "f", american: true, age: "20s", oscar: false, action: false, comedy: false, marvel: false, british: false, controversial: false, billionaire: true, athlete: false, singer: false, rapper: false, latino: false, asian: false, black: false, royal: false, techie: false, model: true, tiktok: true, kpop: false },
+      { name: "MrBeast", emoji: "🍫", cat: "Influencer", gender: "m", american: true, age: "20s", oscar: false, action: false, comedy: true, marvel: false, british: false, controversial: false, billionaire: false, athlete: false, singer: false, rapper: false, latino: false, asian: false, black: false, royal: false, techie: false, model: false, tiktok: true, kpop: false },
+      { name: "Charli D'Amelio", emoji: "💃", cat: "Influencer", gender: "f", american: true, age: "20s", oscar: false, action: false, comedy: false, marvel: false, british: false, controversial: false, billionaire: false, athlete: false, singer: false, rapper: false, latino: false, asian: false, black: false, royal: false, techie: false, model: true, tiktok: true, kpop: false },
+      { name: "PewDiePie", emoji: "📹", cat: "Influencer", gender: "m", american: false, age: "30s", oscar: false, action: false, comedy: true, marvel: false, british: false, controversial: true, billionaire: false, athlete: false, singer: false, rapper: false, latino: false, asian: false, black: false, royal: false, techie: false, model: false, tiktok: false, kpop: false },
+      
+      // Royals/Politics
+      { name: "Prince William", emoji: "👑", cat: "Royal", gender: "m", american: false, age: "40s", oscar: false, action: false, comedy: false, marvel: false, british: true, controversial: false, billionaire: true, athlete: false, singer: false, rapper: false, latino: false, asian: false, black: false, royal: true, techie: false, model: false, tiktok: false, kpop: false },
+      { name: "Kate Middleton", emoji: "👸", cat: "Royal", gender: "f", american: false, age: "40s", oscar: false, action: false, comedy: false, marvel: false, british: true, controversial: false, billionaire: false, athlete: false, singer: false, rapper: false, latino: false, asian: false, black: false, royal: true, techie: false, model: true, tiktok: false, kpop: false },
+      { name: "Barack Obama", emoji: "🇺🇸", cat: "Politics", gender: "m", american: true, age: "60+", oscar: false, action: false, comedy: false, marvel: false, british: false, controversial: false, billionaire: false, athlete: false, singer: false, rapper: false, latino: false, asian: false, black: true, royal: false, techie: false, model: false, tiktok: false, kpop: false },
+      { name: "Donald Trump", emoji: "🏛️", cat: "Politics", gender: "m", american: true, age: "70+", oscar: false, action: false, comedy: false, marvel: false, british: false, controversial: true, billionaire: true, athlete: false, singer: false, rapper: false, latino: false, asian: false, black: false, royal: false, techie: false, model: false, tiktok: true, kpop: false },
+      
+      // Media
+      { name: "Oprah Winfrey", emoji: "📺", cat: "Media", gender: "f", american: true, age: "60+", oscar: false, action: false, comedy: false, marvel: false, british: false, controversial: false, billionaire: true, athlete: false, singer: false, rapper: false, latino: false, asian: false, black: true, royal: false, techie: false, model: false, tiktok: false, kpop: false },
+      { name: "Gordon Ramsay", emoji: "👨‍🍳", cat: "Media", gender: "m", american: false, age: "50s", oscar: false, action: false, comedy: true, marvel: false, british: true, controversial: true, billionaire: false, athlete: false, singer: false, rapper: false, latino: false, asian: false, black: false, royal: false, techie: false, model: false, tiktok: true, kpop: false },
+      { name: "Gigi Hadid", emoji: "👠", cat: "Model", gender: "f", american: true, age: "20s", oscar: false, action: false, comedy: false, marvel: false, british: false, controversial: false, billionaire: false, athlete: false, singer: false, rapper: false, latino: false, asian: false, black: false, royal: false, techie: false, model: true, tiktok: true, kpop: false },
     ];
 
     const Qs = [
-      { t: "Did they found their company?", k: "founder" },
-      { t: "Do they wear glasses?", k: "glasses" },
-      { t: "Born in America?", k: "american" },
-      { t: "Often controversial?", k: "controversial" },
-      { t: "Top 10 richest?", k: "richest" },
-      { t: "Bald?", k: "bald" },
-      { t: "Gaming in their business?", k: "gaming" },
-      { t: "AI core to company?", k: "ai" },
-      { t: "From India?", k: "indian" },
-      { t: "Female?", k: "female" },
-      { t: "Company makes chips?", k: "chips" },
-      { t: "Very active on social media?", k: "social" },
+      { t: "A woman?", k: "gender", match: "f", w: 4 },
+      { t: "American?", k: "american", w: 2 },
+      { t: "An athlete?", k: "athlete", w: 3 },
+      { t: "A singer or musician?", k: "singer", w: 3 },
+      { t: "An actor?", k: "cat", match: "Actor", w: 3 },
+      { t: "Black?", k: "black", w: 3 },
+      { t: "A rapper?", k: "rapper", w: 3 },
+      { t: "Controversial?", k: "controversial", w: 2 },
+      { t: "A billionaire?", k: "billionaire", w: 2 },
+      { t: "British?", k: "british", w: 3 },
+      { t: "Asian?", k: "asian", w: 3 },
+      { t: "Latino/Hispanic?", k: "latino", w: 3 },
+      { t: "In their 20s?", k: "age", match: "20s", w: 2 },
+      { t: "Over 50?", k: "age", match: ["50s", "60+", "70+"], w: 2 },
+      { t: "Won an Oscar?", k: "oscar", w: 3 },
+      { t: "In Marvel movies?", k: "marvel", w: 3 },
+      { t: "Royalty?", k: "royal", w: 4 },
+      { t: "In tech industry?", k: "techie", w: 3 },
+      { t: "A model?", k: "model", w: 2 },
+      { t: "Famous on TikTok?", k: "tiktok", w: 2 },
+      { t: "Known for action movies?", k: "action", w: 2 },
+      { t: "K-pop artist?", k: "kpop", w: 4 },
+      { t: "An influencer/YouTuber?", k: "cat", match: "Influencer", w: 3 },
+      { t: "Known for comedy?", k: "comedy", w: 2 },
     ];
 
     let G = { phase: 'intro', scores: {}, asked: [], q: null, n: 0, guess: null };
@@ -685,9 +747,9 @@
           <div class="text" style="opacity:0.7; margin-bottom:20px;">About man and machine.</div>
           <div class="genie-eyes"><div class="genie-eye"></div><div class="genie-eye"></div></div>
           <div class="genie-orb"><div class="genie-orb-glow"></div><div class="genie-orb-inner"></div></div>
-          <div class="genie-title">TECH GENIE</div>
-          <div class="genie-sub">PATTERN RECOGNITION</div>
-          <div class="text" style="margin-bottom:20px;">Think of a tech CEO.</div>
+          <div class="genie-title">CELEBRITY GENIE</div>
+          <div class="genie-sub">${celebs.length} CELEBRITIES</div>
+          <div class="text" style="margin-bottom:20px;">Think of a famous person.</div>
           <button class="genie-btn start" onclick="startG()">BEGIN</button>
         `;
       } else if (G.phase === 'thinking') {
@@ -713,7 +775,7 @@
         el.innerHTML = `
           <div class="genie-emoji">${G.guess.emoji}</div>
           <div class="genie-name">${G.guess.name}</div>
-          <div class="genie-company">${G.guess.co}</div>
+          <div class="genie-company">${G.guess.cat}</div>
           <div class="genie-msg">Is this who you thought of?</div>
           <div class="genie-btns">
             <button class="genie-btn yes" onclick="resultG(true)">YES!</button>
@@ -740,7 +802,7 @@
     }
 
     function startG() {
-      CEOs.forEach(c => G.scores[c.name] = 50);
+      celebs.forEach(c => G.scores[c.name] = 50);
       G.asked = []; G.n = 0;
       G.phase = 'thinking';
       renderG();
@@ -748,14 +810,21 @@
     }
 
     function pickQ() {
-      const avail = Qs.filter(q => !G.asked.includes(q.k));
+      const avail = Qs.filter(q => !G.asked.includes(q.k + (q.match || '')));
       if (!avail.length) { makeGuess(); return; }
 
-      const valid = CEOs.filter(c => G.scores[c.name] > 15);
+      const valid = celebs.filter(c => G.scores[c.name] > 10);
       let best = avail[0], bestSplit = -1;
+      
       avail.forEach(q => {
-        let yes = valid.filter(c => c[q.k]).length;
-        const split = Math.min(yes, valid.length - yes);
+        let yes = 0;
+        valid.forEach(c => {
+          const val = c[q.k];
+          if (q.match) {
+            if (Array.isArray(q.match) ? q.match.includes(val) : val === q.match) yes++;
+          } else if (val === true) yes++;
+        });
+        const split = Math.min(yes, valid.length - yes) * (q.w || 1);
         if (split > bestSplit) { bestSplit = split; best = q; }
       });
 
@@ -768,25 +837,27 @@
       G.phase = 'thinking';
       renderG();
       setTimeout(() => {
-        CEOs.forEach(c => {
-          const m = c[G.q.k];
-          if (yes && m) G.scores[c.name] += 15;
-          else if (yes && !m) G.scores[c.name] -= 20;
-          else if (!yes && !m) G.scores[c.name] += 15;
-          else G.scores[c.name] -= 20;
-          G.scores[c.name] = Math.max(0, Math.min(100, G.scores[c.name]));
+        const w = G.q.w || 1;
+        celebs.forEach(c => {
+          const val = c[G.q.k];
+          let matches = G.q.match ? (Array.isArray(G.q.match) ? G.q.match.includes(val) : val === G.q.match) : val === true;
+          if (yes && matches) G.scores[c.name] += 12 * w;
+          else if (yes && !matches) G.scores[c.name] -= 18 * w;
+          else if (!yes && !matches) G.scores[c.name] += 12 * w;
+          else G.scores[c.name] -= 18 * w;
+          G.scores[c.name] = Math.max(0, Math.min(150, G.scores[c.name]));
         });
-        G.asked.push(G.q.k);
+        G.asked.push(G.q.k + (G.q.match || ''));
         G.n++;
 
-        const sorted = CEOs.map(c => ({ ...c, s: G.scores[c.name] })).sort((a, b) => b.s - a.s);
-        if (sorted[0].s - sorted[1].s > 40 || G.n >= 12) makeGuess();
+        const sorted = celebs.map(c => ({ ...c, s: G.scores[c.name] })).sort((a, b) => b.s - a.s);
+        if ((G.n >= 5 && sorted[0].s - sorted[1].s > 40) || G.n >= 18) makeGuess();
         else pickQ();
       }, 800);
     }
 
     function makeGuess() {
-      G.guess = CEOs.reduce((a, b) => G.scores[a.name] > G.scores[b.name] ? a : b);
+      G.guess = celebs.reduce((a, b) => G.scores[a.name] > G.scores[b.name] ? a : b);
       G.phase = 'reveal';
       renderG();
     }
@@ -794,7 +865,7 @@
     function resultG(correct) {
       if (correct) { G.phase = 'victory'; renderG(); return; }
       G.scores[G.guess.name] = 0;
-      if (CEOs.filter(c => G.scores[c.name] > 15).length) {
+      if (celebs.filter(c => G.scores[c.name] > 10).length && G.n < 20) {
         G.phase = 'thinking';
         renderG();
         setTimeout(pickQ, 800);
@@ -806,7 +877,7 @@
 
     function getConf() {
       const s = Object.values(G.scores).sort((a, b) => b - a);
-      return s.length ? Math.min(100, s[0] - (s[1] || 0) + 30) : 0;
+      return s.length ? Math.min(100, s[0] - (s[1] || 0) + 20) : 0;
     }
 
     window.startG = startG;
