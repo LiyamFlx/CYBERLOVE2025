@@ -1320,7 +1320,7 @@
           <div class="genie-orb"><div class="genie-orb-glow"></div><div class="genie-orb-inner"></div></div>
           <div class="genie-title">TECH GENIE</div>
           <div class="genie-sub">PATTERN RECOGNITION DEMO</div>
-          <p style="color:#00FF00; font-size:16px; margin-bottom:20px;">Think of a tech CEO. I'll guess in 4 questions.</p>
+          <p style="color:#00FF00; font-size:16px; margin-bottom:20px;">Think of a tech CEO. I'll read your mind.</p>
           <button class="genie-btn start" onclick="startGenie()">BEGIN</button>
         `;
       } else if (genieState.phase === 'thinking') {
@@ -1335,7 +1335,7 @@
           <div class="genie-eyes"><div class="genie-eye"></div><div class="genie-eye"></div></div>
           <div class="genie-orb"><div class="genie-orb-glow"></div><div class="genie-orb-inner"></div></div>
           <div class="genie-confidence">${confDots}</div>
-          <div class="genie-qnum">Q${genieState.qNum + 1} of 4</div>
+          <div class="genie-qnum">Q${genieState.qNum + 1}</div>
           <div class="genie-question">${genieState.currentQ.text}</div>
           <div class="genie-btns">
             <button class="genie-btn yes" onclick="answerGenie(true)">YES</button>
@@ -1433,7 +1433,7 @@
         const sorted = techCEOs.map(c => ({ ...c, score: genieState.scores[c.name] })).sort((a, b) => b.score - a.score);
         const gap = sorted[0].score - sorted[1].score;
 
-        if ((genieState.qNum >= 3 && gap > 25) || genieState.qNum >= 4) {
+        if (gap > 40 || genieState.qNum >= 12) {
           makeGenieGuess();
         } else {
           pickGenieQuestion();
@@ -1452,7 +1452,7 @@
         genieState.phase = 'victory';
       } else {
         genieState.scores[genieState.guess.name] = 0;
-        if (techCEOs.filter(c => genieState.scores[c.name] > 15).length && genieState.qNum < 5) {
+        if (techCEOs.filter(c => genieState.scores[c.name] > 15).length) {
           genieState.phase = 'thinking';
           renderGenie();
           setTimeout(() => pickGenieQuestion(), 1000);
