@@ -16,12 +16,12 @@
       background: #000;
       color: #00FF00;
       font-family: 'VT323', monospace;
-      font-size: 20px;
+      font-size: 22px;
       line-height: 1.5;
       overflow: hidden;
     }
 
-    /* Subtle CRT effect */
+    /* Subtle CRT scanlines */
     body::before {
       content: "";
       position: fixed;
@@ -37,6 +37,7 @@
       flex-direction: column;
     }
 
+    /* Progress */
     .progress-bar {
       position: fixed;
       top: 0;
@@ -46,7 +47,6 @@
       background: rgba(0,255,0,0.1);
       z-index: 100;
     }
-
     .progress-fill {
       height: 100%;
       background: #00FF00;
@@ -58,23 +58,24 @@
       position: fixed;
       top: 20px;
       right: 20px;
-      font-size: 16px;
+      font-size: 18px;
       color: #00FF00;
       z-index: 100;
     }
 
+    /* Main content */
     .main {
       flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 60px 24px 100px;
+      padding: 60px 28px 110px;
       overflow-y: auto;
     }
 
     .frame {
       width: 100%;
-      max-width: 700px;
+      max-width: 750px;
     }
 
     .slide {
@@ -82,35 +83,35 @@
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Typography */
+    /* Typography - matching screenshots */
     .label {
-      font-size: 16px;
+      font-size: 18px;
       color: #00FF00;
-      letter-spacing: 4px;
+      letter-spacing: 5px;
       text-transform: uppercase;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
     }
 
     .headline {
-      font-size: 48px;
+      font-size: 52px;
       line-height: 1.1;
-      margin-bottom: 24px;
+      margin-bottom: 28px;
       text-transform: uppercase;
     }
 
     .sub {
-      font-size: 24px;
+      font-size: 26px;
       color: #00FF00;
       margin-bottom: 32px;
       line-height: 1.4;
     }
 
     .text {
-      font-size: 22px;
+      font-size: 24px;
       line-height: 1.6;
     }
 
@@ -127,15 +128,16 @@
     .divider {
       height: 2px;
       background: linear-gradient(90deg, #00FF00 0%, transparent 100%);
-      margin: 28px 0;
+      margin: 32px 0;
     }
 
-    /* Lists - matching screenshot style */
+    /* Lists - matching screenshot exactly */
     .list-item {
       display: flex;
       align-items: flex-start;
-      margin-bottom: 20px;
-      font-size: 22px;
+      margin-bottom: 24px;
+      font-size: 24px;
+      line-height: 1.5;
     }
 
     .list-item::before {
@@ -156,66 +158,74 @@
 
     /* Hero */
     .hero-title {
-      font-size: 72px;
+      font-size: 80px;
       line-height: 1;
-      margin-bottom: 20px;
-      text-shadow: 0 0 30px rgba(0,255,0,0.4);
+      margin-bottom: 24px;
+      text-shadow: 0 0 40px rgba(0,255,0,0.4);
     }
 
     .hero-tag {
       font-size: 18px;
       color: #00FF00;
-      letter-spacing: 3px;
-      border: 1px solid #00FF00;
+      letter-spacing: 4px;
+      border: 2px solid #00FF00;
       display: inline-block;
-      padding: 8px 16px;
-      margin-bottom: 32px;
+      padding: 10px 20px;
+      margin-bottom: 36px;
     }
 
     /* Columns */
-    .cols { display: flex; gap: 32px; margin: 24px 0; }
+    .cols { display: flex; gap: 40px; margin: 28px 0; }
     .col { flex: 1; }
     .col-head {
-      font-size: 16px;
+      font-size: 18px;
       color: #00FF00;
-      border-bottom: 1px solid #00FF00;
-      padding-bottom: 8px;
-      margin-bottom: 16px;
+      border-bottom: 2px solid #00FF00;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
       text-transform: uppercase;
+      letter-spacing: 2px;
     }
     .col-head.pink { color: #FF00FF; border-color: #FF00FF; }
 
     /* Stack diagram */
-    .stack { display: flex; flex-direction: column; align-items: center; margin: 24px 0; }
+    .stack { display: flex; flex-direction: column; align-items: center; margin: 28px 0; }
     .stack-box {
       width: 100%;
-      max-width: 400px;
-      padding: 16px;
+      max-width: 420px;
+      padding: 18px;
       text-align: center;
-      border: 1px solid #00FF00;
+      border: 2px solid #00FF00;
       color: #00FF00;
-      font-size: 16px;
-      letter-spacing: 2px;
+      font-size: 18px;
+      letter-spacing: 3px;
     }
     .stack-box.core {
-      border: 2px solid #FF00FF;
+      border: 3px solid #FF00FF;
       color: #FF00FF;
       background: rgba(255,0,255,0.05);
-      padding: 24px;
-      margin: 8px 0;
+      padding: 28px;
+      margin: 10px 0;
+      box-shadow: 0 0 30px rgba(255,0,255,0.2);
     }
     .stack-box.core .sub-text {
-      font-size: 12px;
-      margin-top: 8px;
-      color: #FF00FF;
+      font-size: 14px;
+      margin-top: 10px;
+      letter-spacing: 2px;
       opacity: 0.8;
     }
-    .arrow { font-size: 20px; color: #00FF00; margin: 4px 0; }
+    .arrow { font-size: 24px; color: #00FF00; margin: 6px 0; }
 
     /* Metrics */
-    .metric { display: flex; justify-content: space-between; border-bottom: 1px solid #00FF00; padding: 16px 0; }
-    .metric-label { font-size: 18px; }
-    .metric-val { font-size: 28px; color: #FF00FF; }
+    .metric { 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center;
+      border-bottom: 2px solid #00FF00; 
+      padding: 18px 0; 
+    }
+    .metric-label { font-size: 20px; }
+    .metric-val { font-size: 32px; color: #FF00FF; text-shadow: 0 0 15px rgba(255,0,255,0.4); }
 
     /* Navigation */
     .nav {
@@ -225,9 +235,9 @@
       right: 0;
       display: flex;
       justify-content: space-between;
-      padding: 16px 20px;
-      padding-bottom: max(16px, env(safe-area-inset-bottom));
-      background: linear-gradient(to top, #000 70%, transparent);
+      padding: 20px 24px;
+      padding-bottom: max(20px, env(safe-area-inset-bottom));
+      background: linear-gradient(to top, #000 80%, transparent);
       z-index: 100;
     }
 
@@ -236,21 +246,23 @@
       border: 2px solid #00FF00;
       color: #00FF00;
       font-family: 'VT323', monospace;
-      font-size: 18px;
-      padding: 12px 24px;
+      font-size: 20px;
+      padding: 14px 28px;
       cursor: pointer;
-      transition: 0.2s;
+      transition: all 0.2s;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
-    .btn:hover { background: rgba(0,255,0,0.1); }
+    .btn:hover { background: rgba(0,255,0,0.1); box-shadow: 0 0 20px rgba(0,255,0,0.3); }
     .btn:active { transform: scale(0.96); }
-    .btn:disabled { opacity: 0.3; }
+    .btn:disabled { opacity: 0.3; cursor: default; }
 
     .btn.primary {
       background: #00FF00;
       color: #000;
     }
-    .btn.primary:hover { background: #33FF33; }
+    .btn.primary:hover { background: #33FF33; box-shadow: 0 0 25px rgba(0,255,0,0.5); }
 
     /* Modal */
     .modal {
@@ -264,16 +276,17 @@
       opacity: 0;
       pointer-events: none;
       transition: 0.3s;
-      padding: 20px;
+      padding: 24px;
     }
     .modal.open { opacity: 1; pointer-events: auto; }
 
     .modal-box {
       background: #000;
       border: 2px solid #00FF00;
-      padding: 32px;
+      padding: 36px;
       width: 100%;
-      max-width: 450px;
+      max-width: 480px;
+      position: relative;
     }
 
     .modal-close {
@@ -283,129 +296,59 @@
       background: none;
       border: none;
       color: #00FF00;
-      font-size: 32px;
+      font-size: 36px;
       cursor: pointer;
+      line-height: 1;
     }
+    .modal-close:hover { color: #FF00FF; }
 
-    .modal input, .modal textarea {
+    .modal input {
       width: 100%;
       background: #000;
-      border: 1px solid #00FF00;
+      border: 2px solid #00FF00;
       color: #00FF00;
-      padding: 14px;
-      margin-bottom: 12px;
+      padding: 16px;
+      margin-bottom: 14px;
       font-family: 'VT323', monospace;
-      font-size: 18px;
+      font-size: 20px;
     }
-    .modal input::placeholder, .modal textarea::placeholder { color: #009900; }
+    .modal input:focus { outline: none; border-color: #33FF33; box-shadow: 0 0 15px rgba(0,255,0,0.3); }
+    .modal input::placeholder { color: #009900; }
 
-    /* Genie */
-    .genie-wrap { text-align: center; }
-
-    .genie-orb {
-      width: 100px;
-      height: 100px;
-      margin: 0 auto 20px;
-      position: relative;
+    /* CTA Slide */
+    .cta-wrap { text-align: center; }
+    .cta-headline {
+      font-size: 48px;
+      line-height: 1.2;
+      margin-bottom: 32px;
     }
-    .genie-orb-glow {
-      position: absolute;
-      inset: 0;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(255,0,255,0.4) 0%, transparent 70%);
-      animation: pulse 2s ease-in-out infinite;
-    }
-    .genie-orb-inner {
-      position: absolute;
-      inset: 10px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, #1a001a, #000);
-      border: 2px solid #FF00FF;
-      box-shadow: 0 0 25px rgba(255,0,255,0.3);
-    }
-    .genie-orb.thinking .genie-orb-glow { animation: spin 1.5s linear infinite; }
-
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); opacity: 0.7; }
-      50% { transform: scale(1.1); opacity: 1; }
-    }
-    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-
-    .genie-eyes {
-      display: flex;
-      justify-content: center;
-      gap: 16px;
-      margin-bottom: 8px;
-    }
-    .genie-eye {
-      width: 12px;
-      height: 24px;
-      background: linear-gradient(to bottom, #00FF00, #009900);
-      border-radius: 50%;
-      box-shadow: 0 0 10px rgba(0,255,0,0.5);
-    }
-
-    .genie-title { font-size: 28px; margin-bottom: 4px; }
-    .genie-sub { font-size: 14px; color: #FF00FF; letter-spacing: 2px; margin-bottom: 20px; }
-    .genie-q { font-size: 22px; margin: 20px 0; min-height: 60px; }
-    .genie-qnum { font-size: 14px; color: #009900; }
-
-    .genie-btns { display: flex; gap: 20px; justify-content: center; margin-top: 20px; }
-
-    .genie-btn {
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      border: none;
-      font-family: 'VT323', monospace;
-      font-size: 18px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    .genie-btn.yes { background: linear-gradient(135deg, #00FF00, #009900); color: #000; box-shadow: 0 0 20px rgba(0,255,0,0.4); }
-    .genie-btn.no { background: linear-gradient(135deg, #FF00FF, #990099); color: #000; box-shadow: 0 0 20px rgba(255,0,255,0.4); }
-    .genie-btn:active { transform: scale(0.95); }
-
-    .genie-btn.start {
-      width: auto;
-      height: auto;
-      padding: 14px 32px;
-      border-radius: 30px;
-      background: linear-gradient(135deg, #FF00FF, #00FF00);
-      font-size: 16px;
-    }
-
-    .genie-emoji { font-size: 56px; margin-bottom: 8px; }
-    .genie-name { font-size: 28px; color: #FF00FF; }
-    .genie-company { font-size: 18px; color: #00FF00; margin-top: 4px; }
-    .genie-msg { font-size: 16px; opacity: 0.8; margin: 16px 0; }
-
-    .genie-conf { display: flex; justify-content: center; gap: 6px; margin: 12px 0; }
-    .genie-dot { width: 8px; height: 8px; border-radius: 50%; background: #333; }
-    .genie-dot.on { background: #00FF00; box-shadow: 0 0 8px #00FF00; }
 
     /* Mobile */
     @media (max-width: 600px) {
-      .main { padding: 50px 16px 90px; }
-      .hero-title { font-size: 48px; }
-      .headline { font-size: 32px; }
-      .sub { font-size: 20px; }
-      .text, .list-item { font-size: 18px; }
-      .label { font-size: 14px; }
-      .cols { flex-direction: column; gap: 24px; }
-      .metric-val { font-size: 24px; }
-      .btn { font-size: 16px; padding: 10px 18px; }
-      .genie-orb { width: 80px; height: 80px; }
-      .genie-title { font-size: 24px; }
-      .genie-q { font-size: 20px; min-height: 50px; }
-      .genie-btn { width: 56px; height: 56px; font-size: 16px; }
-      .genie-emoji { font-size: 48px; }
-      .genie-name { font-size: 24px; }
+      html, body { font-size: 20px; }
+      .main { padding: 50px 20px 100px; }
+      .hero-title { font-size: 56px; }
+      .hero-tag { font-size: 14px; padding: 8px 14px; letter-spacing: 2px; }
+      .headline { font-size: 36px; }
+      .cta-headline { font-size: 32px; }
+      .sub { font-size: 22px; }
+      .text, .list-item { font-size: 20px; }
+      .label { font-size: 14px; letter-spacing: 3px; }
+      .cols { flex-direction: column; gap: 28px; }
+      .col-head { font-size: 16px; }
+      .metric-label { font-size: 18px; }
+      .metric-val { font-size: 28px; }
+      .btn { font-size: 18px; padding: 12px 20px; }
+      .nav { padding: 16px 16px; }
+      .stack-box { font-size: 16px; padding: 14px; }
+      .stack-box.core { padding: 20px; }
     }
 
     @media (max-width: 380px) {
-      .hero-title { font-size: 40px; }
-      .headline { font-size: 28px; }
+      .hero-title { font-size: 44px; }
+      .headline { font-size: 30px; }
+      .cta-headline { font-size: 28px; }
+      .btn { padding: 10px 16px; font-size: 16px; }
     }
   </style>
 </head>
@@ -426,17 +369,17 @@
   </div>
 
   <div class="modal" id="modal">
-    <div class="modal-box" style="position:relative;">
+    <div class="modal-box">
       <button class="modal-close" id="closeModal" type="button">×</button>
-      <div style="text-align:center; margin-bottom:20px;">
-        <div style="font-size:24px; color:#FF00FF;">REQUEST DEEP DIVE</div>
-        <div style="font-size:14px; color:#009900;">15-min architecture walkthrough</div>
+      <div style="text-align:center; margin-bottom:24px;">
+        <div style="font-size:28px; color:#FF00FF; margin-bottom:8px;">REQUEST DEEP DIVE</div>
+        <div style="font-size:16px; color:#009900;">15-min architecture walkthrough</div>
       </div>
       <form id="contactForm">
         <input type="text" name="name" placeholder="NAME *" required>
         <input type="email" name="email" placeholder="EMAIL *" required>
         <input type="text" name="company" placeholder="COMPANY">
-        <button type="submit" class="btn primary" style="width:100%;">SEND REQUEST →</button>
+        <button type="submit" class="btn primary" style="width:100%; margin-top:8px;">SEND REQUEST →</button>
       </form>
     </div>
   </div>
@@ -449,11 +392,12 @@
         <div class="hero-title">CYBERLOVE</div>
         <div class="sub">The emotional cortex for <span class="white">embodied AI</span>.</div>
         <div class="divider"></div>
-        <div class="text" style="opacity:0.8;">
-          > We teach machines not just how to move...<br>
+        <div class="text">
+          > We teach machines not just how to <span class="white">move</span>...<br>
           > But how to <span class="pink">relate</span>.
         </div>
       `},
+      
       // 2. PROBLEM
       { html: `
         <div class="label">THE GAP</div>
@@ -464,25 +408,27 @@
         <div class="list-item"><span>They cannot earn <span class="pink">trust</span>.</span></div>
         <div class="list-item"><span>They are efficient tools, but <span class="pink">social hazards</span>.</span></div>
       `},
+      
       // 3. WINDOW
       { html: `
         <div class="label">THE OPPORTUNITY</div>
-        <div class="headline">THE WINDOW OF <span class="pink">AUTHENTICITY</span></div>
+        <div class="headline">WINDOW OF <span class="pink">AUTHENTICITY</span></div>
         <div class="divider"></div>
         <div class="cols">
           <div class="col">
-            <div class="col-head pink">2024 — 2028 (NOW)</div>
-            <div class="text">Humans bond with AI companions with <span class="white">unguarded honesty</span>.</div>
+            <div class="col-head pink">2024 — 2028</div>
+            <div class="text">Humans bond with AI with <span class="white">unguarded honesty</span>. Raw emotional data.</div>
           </div>
           <div class="col">
             <div class="col-head">2029+</div>
-            <div class="text" style="opacity:0.6;">Normalization. Users become guarded. Window closes.</div>
+            <div class="text" style="opacity:0.6;">Normalization. Users become guarded. Window closes forever.</div>
           </div>
         </div>
-        <div class="text white" style="text-align:center; margin-top:24px;">
+        <div class="text white" style="text-align:center; margin-top:28px;">
           We capture the only <span class="pink">pristine dataset</span> that will ever exist.
         </div>
       `},
+      
       // 4. SOLUTION
       { html: `
         <div class="label">THE SOLUTION</div>
@@ -495,7 +441,11 @@
           <div class="arrow">↓</div>
           <div class="stack-box">ROBOT CONTROLLER</div>
         </div>
+        <div class="text" style="text-align:center; opacity:0.8; margin-top:20px;">
+          "Is the user tense? Should I back away?"
+        </div>
       `},
+      
       // 5. MARKET
       { html: `
         <div class="label">MARKET</div>
@@ -504,8 +454,11 @@
         <div class="metric"><span class="metric-label">HUMANOID ROBOTICS</span><span class="metric-val">$38B</span></div>
         <div class="metric"><span class="metric-label">AUTONOMOUS VEHICLES</span><span class="metric-val">$60B</span></div>
         <div class="metric"><span class="metric-label">SOCIAL & ELDER CARE</span><span class="metric-val">$14B</span></div>
-        <div class="text" style="margin-top:24px;">Emotional safety becomes <span class="white">mandatory compliance</span>.</div>
+        <div class="text" style="margin-top:28px;">
+          Emotional safety becomes <span class="white">mandatory compliance</span>.
+        </div>
       `},
+      
       // 6. BUSINESS
       { html: `
         <div class="label">BUSINESS MODEL</div>
@@ -514,7 +467,7 @@
           <div class="col">
             <div class="col-head">CORE LICENSING</div>
             <div class="list-item"><span>Recurring B2B revenue</span></div>
-            <div class="list-item"><span>Per-unit fee</span></div>
+            <div class="list-item"><span>Per-unit installation fee</span></div>
             <div class="list-item"><span>"Intel Inside" for empathy</span></div>
           </div>
           <div class="col">
@@ -525,7 +478,8 @@
           </div>
         </div>
       `},
-      // 7. DEFENSIBILITY
+      
+      // 7. DEFENSIBILITY - matching screenshot exactly
       { html: `
         <div class="label">DEFENSIBILITY</div>
         <div class="headline">HARD TO <span class="pink">REPLICATE.</span></div>
@@ -535,13 +489,25 @@
         <div class="list-item"><span class="key">ABSTRACTION IP</span> <span class="val">— structured, transferable</span></div>
         <div class="list-item"><span class="key">COMPOUND LEARNING</span> <span class="val">— improves with scale</span></div>
       `},
-      // 8. GENIE + CTA
-      { type: 'genie' }
+      
+      // 8. CTA - matching screenshot
+      { html: `
+        <div class="cta-wrap">
+          <div class="cta-headline">YOU WANT TO KNOW<br>HOW IT <span class="pink">WORKS.</span></div>
+          <div class="divider" style="max-width:300px; margin:32px auto;"></div>
+          <div class="text" style="opacity:0.8; margin-bottom:32px;">
+            15-minute architecture deep-dive.<br>
+            See the data. See the model. See the moat.
+          </div>
+          <button class="btn primary" onclick="openModal()" style="padding:18px 40px; font-size:22px;">
+            REQUEST DEEP-DIVE →
+          </button>
+        </div>
+      `}
     ];
 
     let idx = 0;
     let modalOpen = false;
-    const stats = { times: {}, start: Date.now(), last: Date.now() };
 
     const content = document.getElementById('content');
     const cur = document.getElementById('cur');
@@ -553,52 +519,38 @@
 
     tot.textContent = String(SLIDES.length).padStart(2, '0');
 
-    function trackLeave() {
-      stats.times[idx] = (stats.times[idx] || 0) + (Date.now() - stats.last);
-    }
-
     function render() {
-      stats.last = Date.now();
-      const slide = SLIDES[idx];
-
-      if (slide.type === 'genie') {
-        content.innerHTML = '<div id="genie" class="genie-wrap"></div>';
-        initGenie();
-      } else {
-        content.innerHTML = slide.html;
-      }
-
+      content.innerHTML = SLIDES[idx].html;
       cur.textContent = String(idx + 1).padStart(2, '0');
       prog.style.width = ((idx + 1) / SLIDES.length * 100) + '%';
       prevBtn.disabled = idx === 0;
       nextBtn.textContent = idx === SLIDES.length - 1 ? 'RESTART ↻' : 'NEXT →';
-
       content.classList.remove('slide');
       void content.offsetWidth;
       content.classList.add('slide');
     }
 
     function next() {
-      trackLeave();
       if (idx < SLIDES.length - 1) idx++;
-      else { idx = 0; stats.start = Date.now(); stats.times = {}; }
+      else idx = 0;
       render();
     }
 
     function prev() {
-      trackLeave();
       if (idx > 0) { idx--; render(); }
     }
 
     nextBtn.onclick = next;
     prevBtn.onclick = prev;
 
+    // Keyboard
     document.addEventListener('keydown', e => {
       if (modalOpen) { if (e.key === 'Escape') closeModal(); return; }
       if (e.key === 'ArrowRight' || e.code === 'Space') { e.preventDefault(); next(); }
       if (e.key === 'ArrowLeft') prev();
     });
 
+    // Touch swipe
     let touchX = 0;
     document.addEventListener('touchstart', e => { if (!modalOpen) touchX = e.touches[0].clientX; });
     document.addEventListener('touchend', e => {
@@ -608,6 +560,7 @@
       if (dx > 50) prev();
     });
 
+    // Modal
     function openModal() { modal.classList.add('open'); modalOpen = true; }
     function closeModal() { modal.classList.remove('open'); modalOpen = false; }
     window.openModal = openModal;
@@ -615,275 +568,32 @@
     document.getElementById('closeModal').onclick = e => { e.preventDefault(); closeModal(); };
     modal.onclick = e => { if (e.target === modal) closeModal(); };
 
+    // Form inputs - prevent navigation
     document.querySelectorAll('#contactForm input').forEach(el => {
       el.addEventListener('keydown', e => e.stopPropagation());
     });
 
+    // Form submit
     document.getElementById('contactForm').onsubmit = e => {
       e.preventDefault();
       const name = e.target.name.value;
       const email = e.target.email.value;
       const company = e.target.company.value || 'N/A';
 
-      const subject = encodeURIComponent(`CYBERLOVE: ${name}`);
-      const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nCompany: ${company}`);
+      const subject = encodeURIComponent(`CYBERLOVE Deep-Dive Request: ${name}`);
+      const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nCompany: ${company}\n\nRequesting 15-min architecture walkthrough.`);
       window.open(`mailto:liyamdlexer@gmail.com,slavintal@gmail.com?subject=${subject}&body=${body}`, '_blank');
 
       const btn = e.target.querySelector('button');
       btn.textContent = 'SENT ✓';
       btn.style.background = '#FF00FF';
-      setTimeout(() => { closeModal(); btn.textContent = 'SEND REQUEST →'; btn.style.background = ''; e.target.reset(); }, 2000);
+      setTimeout(() => { 
+        closeModal(); 
+        btn.textContent = 'SEND REQUEST →'; 
+        btn.style.background = ''; 
+        e.target.reset(); 
+      }, 2000);
     };
-
-    // === CELEBRITY GENIE ===
-    const celebs = [
-      // Actors
-      { name: "Tom Hanks", emoji: "🎬", cat: "Actor", gender: "m", american: true, age: "60+", oscar: true, action: false, comedy: true, marvel: false, british: false, controversial: false, billionaire: false, athlete: false, singer: false, rapper: false, latino: false, asian: false, black: false, royal: false, techie: false, model: false, tiktok: false, kpop: false },
-      { name: "Leonardo DiCaprio", emoji: "🌹", cat: "Actor", gender: "m", american: true, age: "50s", oscar: true, action: true, comedy: false, marvel: false, british: false, controversial: false, billionaire: false, athlete: false, singer: false, rapper: false, latino: false, asian: false, black: false, royal: false, techie: false, model: false, tiktok: false, kpop: false },
-      { name: "Dwayne Johnson", emoji: "💪", cat: "Actor", gender: "m", american: true, age: "50s", oscar: false, action: true, comedy: true, marvel: false, british: false, controversial: false, billionaire: false, athlete: true, singer: false, rapper: false, latino: false, asian: false, black: true, royal: false, techie: false, model: false, tiktok: true, kpop: false },
-      { name: "Scarlett Johansson", emoji: "🖤", cat: "Actor", gender: "f", american: true, age: "30s", oscar: false, action: true, comedy: false, marvel: true, british: false, controversial: false, billionaire: false, athlete: false, singer: false, rapper: false, latino: false, asian: false, black: false, royal: false, techie: false, model: false, tiktok: false, kpop: false },
-      { name: "Tom Cruise", emoji: "✈️", cat: "Actor", gender: "m", american: true, age: "60+", oscar: false, action: true, comedy: false, marvel: false, british: false, controversial: true, billionaire: false, athlete: false, singer: false, rapper: false, latino: false, asian: false, black: false, royal: false, techie: false, model: false, tiktok: false, kpop: false },
-      { name: "Robert Downey Jr.", emoji: "🦾", cat: "Actor", gender: "m", american: true, age: "50s", oscar: true, action: true, comedy: true, marvel: true, british: false, controversial: false, billionaire: false, athlete: false, singer: false, rapper: false, latino: false, asian: false, black: false, royal: false, techie: false, model: false, tiktok: false, kpop: false },
-      { name: "Zendaya", emoji: "🕷️", cat: "Actor", gender: "f", american: true, age: "20s", oscar: false, action: true, comedy: false, marvel: true, british: false, controversial: false, billionaire: false, athlete: false, singer: true, rapper: false, latino: false, asian: false, black: true, royal: false, techie: false, model: true, tiktok: true, kpop: false },
-      { name: "Timothée Chalamet", emoji: "🏜️", cat: "Actor", gender: "m", american: true, age: "20s", oscar: false, action: false, comedy: false, marvel: false, british: false, controversial: false, billionaire: false, athlete: false, singer: false, rapper: false, latino: false, asian: false, black: false, royal: false, techie: false, model: true, tiktok: true, kpop: false },
-      { name: "Emma Watson", emoji: "🪄", cat: "Actor", gender: "f", american: false, age: "30s", oscar: false, action: false, comedy: false, marvel: false, british: true, controversial: false, billionaire: false, athlete: false, singer: false, rapper: false, latino: false, asian: false, black: false, royal: false, techie: false, model: true, tiktok: false, kpop: false },
-      { name: "Jackie Chan", emoji: "🥋", cat: "Actor", gender: "m", american: false, age: "60+", oscar: true, action: true, comedy: true, marvel: false, british: false, controversial: false, billionaire: false, athlete: true, singer: false, rapper: false, latino: false, asian: true, black: false, royal: false, techie: false, model: false, tiktok: false, kpop: false },
-      
-      // Musicians
-      { name: "Taylor Swift", emoji: "🎸", cat: "Musician", gender: "f", american: true, age: "30s", oscar: false, action: false, comedy: false, marvel: false, british: false, controversial: false, billionaire: true, athlete: false, singer: true, rapper: false, latino: false, asian: false, black: false, royal: false, techie: false, model: false, tiktok: true, kpop: false },
-      { name: "Beyoncé", emoji: "🐝", cat: "Musician", gender: "f", american: true, age: "40s", oscar: false, action: false, comedy: false, marvel: false, british: false, controversial: false, billionaire: false, athlete: false, singer: true, rapper: false, latino: false, asian: false, black: true, royal: false, techie: false, model: false, tiktok: false, kpop: false },
-      { name: "Drake", emoji: "🦉", cat: "Musician", gender: "m", american: false, age: "30s", oscar: false, action: false, comedy: false, marvel: false, british: false, controversial: true, billionaire: false, athlete: false, singer: true, rapper: true, latino: false, asian: false, black: true, royal: false, techie: false, model: false, tiktok: true, kpop: false },
-      { name: "Rihanna", emoji: "💎", cat: "Musician", gender: "f", american: false, age: "30s", oscar: false, action: false, comedy: false, marvel: false, british: false, controversial: false, billionaire: true, athlete: false, singer: true, rapper: false, latino: false, asian: false, black: true, royal: false, techie: false, model: true, tiktok: false, kpop: false },
-      { name: "Kanye West", emoji: "🐻", cat: "Musician", gender: "m", american: true, age: "40s", oscar: false, action: false, comedy: false, marvel: false, british: false, controversial: true, billionaire: true, athlete: false, singer: true, rapper: true, latino: false, asian: false, black: true, royal: false, techie: false, model: false, tiktok: false, kpop: false },
-      { name: "Ed Sheeran", emoji: "🎤", cat: "Musician", gender: "m", american: false, age: "30s", oscar: false, action: false, comedy: false, marvel: false, british: true, controversial: false, billionaire: false, athlete: false, singer: true, rapper: false, latino: false, asian: false, black: false, royal: false, techie: false, model: false, tiktok: true, kpop: false },
-      { name: "Adele", emoji: "🎵", cat: "Musician", gender: "f", american: false, age: "30s", oscar: true, action: false, comedy: false, marvel: false, british: true, controversial: false, billionaire: false, athlete: false, singer: true, rapper: false, latino: false, asian: false, black: false, royal: false, techie: false, model: false, tiktok: false, kpop: false },
-      { name: "Bad Bunny", emoji: "🐰", cat: "Musician", gender: "m", american: false, age: "30s", oscar: false, action: false, comedy: false, marvel: false, british: false, controversial: false, billionaire: false, athlete: false, singer: true, rapper: true, latino: true, asian: false, black: false, royal: false, techie: false, model: true, tiktok: true, kpop: false },
-      { name: "BTS Jungkook", emoji: "💜", cat: "Musician", gender: "m", american: false, age: "20s", oscar: false, action: false, comedy: false, marvel: false, british: false, controversial: false, billionaire: false, athlete: false, singer: true, rapper: false, latino: false, asian: true, black: false, royal: false, techie: false, model: true, tiktok: true, kpop: true },
-      { name: "Lady Gaga", emoji: "🎭", cat: "Musician", gender: "f", american: true, age: "30s", oscar: true, action: false, comedy: false, marvel: false, british: false, controversial: false, billionaire: false, athlete: false, singer: true, rapper: false, latino: false, asian: false, black: false, royal: false, techie: false, model: false, tiktok: false, kpop: false },
-      { name: "Billie Eilish", emoji: "🖤", cat: "Musician", gender: "f", american: true, age: "20s", oscar: true, action: false, comedy: false, marvel: false, british: false, controversial: false, billionaire: false, athlete: false, singer: true, rapper: false, latino: false, asian: false, black: false, royal: false, techie: false, model: false, tiktok: true, kpop: false },
-      { name: "Shakira", emoji: "🎶", cat: "Musician", gender: "f", american: false, age: "40s", oscar: false, action: false, comedy: false, marvel: false, british: false, controversial: false, billionaire: false, athlete: false, singer: true, rapper: false, latino: true, asian: false, black: false, royal: false, techie: false, model: false, tiktok: true, kpop: false },
-      { name: "Post Malone", emoji: "🍺", cat: "Musician", gender: "m", american: true, age: "20s", oscar: false, action: false, comedy: false, marvel: false, british: false, controversial: false, billionaire: false, athlete: false, singer: true, rapper: true, latino: false, asian: false, black: false, royal: false, techie: false, model: false, tiktok: true, kpop: false },
-      { name: "Snoop Dogg", emoji: "🌿", cat: "Musician", gender: "m", american: true, age: "50s", oscar: false, action: false, comedy: true, marvel: false, british: false, controversial: true, billionaire: false, athlete: false, singer: true, rapper: true, latino: false, asian: false, black: true, royal: false, techie: false, model: false, tiktok: true, kpop: false },
-      
-      // Athletes
-      { name: "Lionel Messi", emoji: "⚽", cat: "Athlete", gender: "m", american: false, age: "30s", oscar: false, action: false, comedy: false, marvel: false, british: false, controversial: false, billionaire: false, athlete: true, singer: false, rapper: false, latino: true, asian: false, black: false, royal: false, techie: false, model: false, tiktok: true, kpop: false },
-      { name: "Cristiano Ronaldo", emoji: "🇵🇹", cat: "Athlete", gender: "m", american: false, age: "30s", oscar: false, action: false, comedy: false, marvel: false, british: false, controversial: false, billionaire: true, athlete: true, singer: false, rapper: false, latino: false, asian: false, black: false, royal: false, techie: false, model: true, tiktok: true, kpop: false },
-      { name: "LeBron James", emoji: "🏀", cat: "Athlete", gender: "m", american: true, age: "30s", oscar: false, action: false, comedy: false, marvel: false, british: false, controversial: false, billionaire: true, athlete: true, singer: false, rapper: false, latino: false, asian: false, black: true, royal: false, techie: false, model: false, tiktok: true, kpop: false },
-      { name: "Serena Williams", emoji: "🎾", cat: "Athlete", gender: "f", american: true, age: "40s", oscar: false, action: false, comedy: false, marvel: false, british: false, controversial: false, billionaire: false, athlete: true, singer: false, rapper: false, latino: false, asian: false, black: true, royal: false, techie: false, model: false, tiktok: false, kpop: false },
-      { name: "Michael Jordan", emoji: "🏆", cat: "Athlete", gender: "m", american: true, age: "60+", oscar: false, action: false, comedy: false, marvel: false, british: false, controversial: false, billionaire: true, athlete: true, singer: false, rapper: false, latino: false, asian: false, black: true, royal: false, techie: false, model: false, tiktok: false, kpop: false },
-      { name: "Conor McGregor", emoji: "🥊", cat: "Athlete", gender: "m", american: false, age: "30s", oscar: false, action: false, comedy: false, marvel: false, british: false, controversial: true, billionaire: false, athlete: true, singer: false, rapper: false, latino: false, asian: false, black: false, royal: false, techie: false, model: false, tiktok: true, kpop: false },
-      { name: "Lewis Hamilton", emoji: "🏎️", cat: "Athlete", gender: "m", american: false, age: "30s", oscar: false, action: false, comedy: false, marvel: false, british: true, controversial: false, billionaire: false, athlete: true, singer: false, rapper: false, latino: false, asian: false, black: true, royal: false, techie: false, model: true, tiktok: true, kpop: false },
-      { name: "David Beckham", emoji: "⚽", cat: "Athlete", gender: "m", american: false, age: "40s", oscar: false, action: false, comedy: false, marvel: false, british: true, controversial: false, billionaire: false, athlete: true, singer: false, rapper: false, latino: false, asian: false, black: false, royal: false, techie: false, model: true, tiktok: true, kpop: false },
-      
-      // Tech/Business
-      { name: "Elon Musk", emoji: "🚀", cat: "Tech", gender: "m", american: true, age: "50s", oscar: false, action: false, comedy: false, marvel: false, british: false, controversial: true, billionaire: true, athlete: false, singer: false, rapper: false, latino: false, asian: false, black: false, royal: false, techie: true, model: false, tiktok: true, kpop: false },
-      { name: "Mark Zuckerberg", emoji: "👤", cat: "Tech", gender: "m", american: true, age: "40s", oscar: false, action: false, comedy: false, marvel: false, british: false, controversial: true, billionaire: true, athlete: false, singer: false, rapper: false, latino: false, asian: false, black: false, royal: false, techie: true, model: false, tiktok: false, kpop: false },
-      { name: "Jeff Bezos", emoji: "📦", cat: "Tech", gender: "m", american: true, age: "60+", oscar: false, action: false, comedy: false, marvel: false, british: false, controversial: false, billionaire: true, athlete: false, singer: false, rapper: false, latino: false, asian: false, black: false, royal: false, techie: true, model: false, tiktok: false, kpop: false },
-      
-      // Influencers
-      { name: "Kim Kardashian", emoji: "💄", cat: "Influencer", gender: "f", american: true, age: "40s", oscar: false, action: false, comedy: false, marvel: false, british: false, controversial: true, billionaire: true, athlete: false, singer: false, rapper: false, latino: false, asian: false, black: false, royal: false, techie: false, model: true, tiktok: true, kpop: false },
-      { name: "Kylie Jenner", emoji: "👄", cat: "Influencer", gender: "f", american: true, age: "20s", oscar: false, action: false, comedy: false, marvel: false, british: false, controversial: false, billionaire: true, athlete: false, singer: false, rapper: false, latino: false, asian: false, black: false, royal: false, techie: false, model: true, tiktok: true, kpop: false },
-      { name: "MrBeast", emoji: "🍫", cat: "Influencer", gender: "m", american: true, age: "20s", oscar: false, action: false, comedy: true, marvel: false, british: false, controversial: false, billionaire: false, athlete: false, singer: false, rapper: false, latino: false, asian: false, black: false, royal: false, techie: false, model: false, tiktok: true, kpop: false },
-      { name: "Charli D'Amelio", emoji: "💃", cat: "Influencer", gender: "f", american: true, age: "20s", oscar: false, action: false, comedy: false, marvel: false, british: false, controversial: false, billionaire: false, athlete: false, singer: false, rapper: false, latino: false, asian: false, black: false, royal: false, techie: false, model: true, tiktok: true, kpop: false },
-      { name: "PewDiePie", emoji: "📹", cat: "Influencer", gender: "m", american: false, age: "30s", oscar: false, action: false, comedy: true, marvel: false, british: false, controversial: true, billionaire: false, athlete: false, singer: false, rapper: false, latino: false, asian: false, black: false, royal: false, techie: false, model: false, tiktok: false, kpop: false },
-      
-      // Royals/Politics
-      { name: "Prince William", emoji: "👑", cat: "Royal", gender: "m", american: false, age: "40s", oscar: false, action: false, comedy: false, marvel: false, british: true, controversial: false, billionaire: true, athlete: false, singer: false, rapper: false, latino: false, asian: false, black: false, royal: true, techie: false, model: false, tiktok: false, kpop: false },
-      { name: "Kate Middleton", emoji: "👸", cat: "Royal", gender: "f", american: false, age: "40s", oscar: false, action: false, comedy: false, marvel: false, british: true, controversial: false, billionaire: false, athlete: false, singer: false, rapper: false, latino: false, asian: false, black: false, royal: true, techie: false, model: true, tiktok: false, kpop: false },
-      { name: "Barack Obama", emoji: "🇺🇸", cat: "Politics", gender: "m", american: true, age: "60+", oscar: false, action: false, comedy: false, marvel: false, british: false, controversial: false, billionaire: false, athlete: false, singer: false, rapper: false, latino: false, asian: false, black: true, royal: false, techie: false, model: false, tiktok: false, kpop: false },
-      { name: "Donald Trump", emoji: "🏛️", cat: "Politics", gender: "m", american: true, age: "70+", oscar: false, action: false, comedy: false, marvel: false, british: false, controversial: true, billionaire: true, athlete: false, singer: false, rapper: false, latino: false, asian: false, black: false, royal: false, techie: false, model: false, tiktok: true, kpop: false },
-      
-      // Media
-      { name: "Oprah Winfrey", emoji: "📺", cat: "Media", gender: "f", american: true, age: "60+", oscar: false, action: false, comedy: false, marvel: false, british: false, controversial: false, billionaire: true, athlete: false, singer: false, rapper: false, latino: false, asian: false, black: true, royal: false, techie: false, model: false, tiktok: false, kpop: false },
-      { name: "Gordon Ramsay", emoji: "👨‍🍳", cat: "Media", gender: "m", american: false, age: "50s", oscar: false, action: false, comedy: true, marvel: false, british: true, controversial: true, billionaire: false, athlete: false, singer: false, rapper: false, latino: false, asian: false, black: false, royal: false, techie: false, model: false, tiktok: true, kpop: false },
-      { name: "Gigi Hadid", emoji: "👠", cat: "Model", gender: "f", american: true, age: "20s", oscar: false, action: false, comedy: false, marvel: false, british: false, controversial: false, billionaire: false, athlete: false, singer: false, rapper: false, latino: false, asian: false, black: false, royal: false, techie: false, model: true, tiktok: true, kpop: false },
-    ];
-
-    const Qs = [
-      { t: "A woman?", k: "gender", match: "f", w: 4 },
-      { t: "American?", k: "american", w: 2 },
-      { t: "An athlete?", k: "athlete", w: 3 },
-      { t: "A singer or musician?", k: "singer", w: 3 },
-      { t: "An actor?", k: "cat", match: "Actor", w: 3 },
-      { t: "Black?", k: "black", w: 3 },
-      { t: "A rapper?", k: "rapper", w: 3 },
-      { t: "Controversial?", k: "controversial", w: 2 },
-      { t: "A billionaire?", k: "billionaire", w: 2 },
-      { t: "British?", k: "british", w: 3 },
-      { t: "Asian?", k: "asian", w: 3 },
-      { t: "Latino/Hispanic?", k: "latino", w: 3 },
-      { t: "In their 20s?", k: "age", match: "20s", w: 2 },
-      { t: "Over 50?", k: "age", match: ["50s", "60+", "70+"], w: 2 },
-      { t: "Won an Oscar?", k: "oscar", w: 3 },
-      { t: "In Marvel movies?", k: "marvel", w: 3 },
-      { t: "Royalty?", k: "royal", w: 4 },
-      { t: "In tech industry?", k: "techie", w: 3 },
-      { t: "A model?", k: "model", w: 2 },
-      { t: "Famous on TikTok?", k: "tiktok", w: 2 },
-      { t: "Known for action movies?", k: "action", w: 2 },
-      { t: "K-pop artist?", k: "kpop", w: 4 },
-      { t: "An influencer/YouTuber?", k: "cat", match: "Influencer", w: 3 },
-      { t: "Known for comedy?", k: "comedy", w: 2 },
-    ];
-
-    let G = { phase: 'intro', scores: {}, asked: [], q: null, n: 0, guess: null };
-
-    function initGenie() {
-      G = { phase: 'intro', scores: {}, asked: [], q: null, n: 0, guess: null };
-      renderG();
-    }
-
-    function renderG() {
-      const el = document.getElementById('genie');
-      if (!el) return;
-
-      const conf = getConf();
-      const dots = [1,2,3,4,5].map(i => `<div class="genie-dot ${i <= Math.ceil(conf/20) ? 'on' : ''}"></div>`).join('');
-
-      if (G.phase === 'intro') {
-        el.innerHTML = `
-          <div class="label">LIVE DEMO</div>
-          <div class="headline" style="font-size:28px;">A TASTE OF WHAT WE <span class="pink">KNOW</span></div>
-          <div class="text" style="opacity:0.7; margin-bottom:20px;">About man and machine.</div>
-          <div class="genie-eyes"><div class="genie-eye"></div><div class="genie-eye"></div></div>
-          <div class="genie-orb"><div class="genie-orb-glow"></div><div class="genie-orb-inner"></div></div>
-          <div class="genie-title">CELEBRITY GENIE</div>
-          <div class="genie-sub">${celebs.length} CELEBRITIES</div>
-          <div class="text" style="margin-bottom:20px;">Think of a famous person.</div>
-          <button class="genie-btn start" onclick="startG()">BEGIN</button>
-        `;
-      } else if (G.phase === 'thinking') {
-        el.innerHTML = `
-          <div class="genie-eyes"><div class="genie-eye"></div><div class="genie-eye"></div></div>
-          <div class="genie-orb thinking"><div class="genie-orb-glow"></div><div class="genie-orb-inner"></div></div>
-          <div class="genie-conf">${dots}</div>
-          <div class="genie-msg">Reading patterns...</div>
-        `;
-      } else if (G.phase === 'question') {
-        el.innerHTML = `
-          <div class="genie-eyes"><div class="genie-eye"></div><div class="genie-eye"></div></div>
-          <div class="genie-orb"><div class="genie-orb-glow"></div><div class="genie-orb-inner"></div></div>
-          <div class="genie-conf">${dots}</div>
-          <div class="genie-qnum">Q${G.n + 1}</div>
-          <div class="genie-q">${G.q.t}</div>
-          <div class="genie-btns">
-            <button class="genie-btn yes" onclick="answerG(true)">YES</button>
-            <button class="genie-btn no" onclick="answerG(false)">NO</button>
-          </div>
-        `;
-      } else if (G.phase === 'reveal') {
-        el.innerHTML = `
-          <div class="genie-emoji">${G.guess.emoji}</div>
-          <div class="genie-name">${G.guess.name}</div>
-          <div class="genie-company">${G.guess.cat}</div>
-          <div class="genie-msg">Is this who you thought of?</div>
-          <div class="genie-btns">
-            <button class="genie-btn yes" onclick="resultG(true)">YES!</button>
-            <button class="genie-btn no" onclick="resultG(false)">NO</button>
-          </div>
-        `;
-      } else if (G.phase === 'victory') {
-        el.innerHTML = `
-          <div class="genie-emoji">${G.guess.emoji}</div>
-          <div style="font-size:32px; margin:8px 0;">✨</div>
-          <div class="headline" style="font-size:32px;">YOU WANT TO KNOW<br>HOW IT <span class="pink">WORKS.</span></div>
-          <div class="text" style="opacity:0.7; margin:16px 0;">Predicted in ${G.n} questions.</div>
-          <button class="btn primary" onclick="openModal()" style="margin-top:16px;">REQUEST DEEP-DIVE →</button>
-        `;
-      } else if (G.phase === 'defeat') {
-        el.innerHTML = `
-          <div style="font-size:48px; margin-bottom:12px;">🌀</div>
-          <div class="headline" style="font-size:28px;">YOU STUMPED ME</div>
-          <div class="text" style="opacity:0.7; margin:12px 0;">More data = better predictions.<br>That's the point.</div>
-          <button class="btn primary" onclick="openModal()" style="margin-top:16px;">REQUEST DEEP-DIVE →</button>
-          <div style="margin-top:16px; color:#009900; cursor:pointer;" onclick="initGenie()">↻ Try again</div>
-        `;
-      }
-    }
-
-    function startG() {
-      celebs.forEach(c => G.scores[c.name] = 50);
-      G.asked = []; G.n = 0;
-      G.phase = 'thinking';
-      renderG();
-      setTimeout(pickQ, 1000);
-    }
-
-    function pickQ() {
-      const avail = Qs.filter(q => !G.asked.includes(q.k + (q.match || '')));
-      if (!avail.length) { makeGuess(); return; }
-
-      const valid = celebs.filter(c => G.scores[c.name] > 10);
-      let best = avail[0], bestSplit = -1;
-      
-      avail.forEach(q => {
-        let yes = 0;
-        valid.forEach(c => {
-          const val = c[q.k];
-          if (q.match) {
-            if (Array.isArray(q.match) ? q.match.includes(val) : val === q.match) yes++;
-          } else if (val === true) yes++;
-        });
-        const split = Math.min(yes, valid.length - yes) * (q.w || 1);
-        if (split > bestSplit) { bestSplit = split; best = q; }
-      });
-
-      G.q = best;
-      G.phase = 'question';
-      renderG();
-    }
-
-    function answerG(yes) {
-      G.phase = 'thinking';
-      renderG();
-      setTimeout(() => {
-        const w = G.q.w || 1;
-        celebs.forEach(c => {
-          const val = c[G.q.k];
-          let matches = G.q.match ? (Array.isArray(G.q.match) ? G.q.match.includes(val) : val === G.q.match) : val === true;
-          if (yes && matches) G.scores[c.name] += 12 * w;
-          else if (yes && !matches) G.scores[c.name] -= 18 * w;
-          else if (!yes && !matches) G.scores[c.name] += 12 * w;
-          else G.scores[c.name] -= 18 * w;
-          G.scores[c.name] = Math.max(0, Math.min(150, G.scores[c.name]));
-        });
-        G.asked.push(G.q.k + (G.q.match || ''));
-        G.n++;
-
-        const sorted = celebs.map(c => ({ ...c, s: G.scores[c.name] })).sort((a, b) => b.s - a.s);
-        if ((G.n >= 5 && sorted[0].s - sorted[1].s > 40) || G.n >= 18) makeGuess();
-        else pickQ();
-      }, 800);
-    }
-
-    function makeGuess() {
-      G.guess = celebs.reduce((a, b) => G.scores[a.name] > G.scores[b.name] ? a : b);
-      G.phase = 'reveal';
-      renderG();
-    }
-
-    function resultG(correct) {
-      if (correct) { G.phase = 'victory'; renderG(); return; }
-      G.scores[G.guess.name] = 0;
-      if (celebs.filter(c => G.scores[c.name] > 10).length && G.n < 20) {
-        G.phase = 'thinking';
-        renderG();
-        setTimeout(pickQ, 800);
-      } else {
-        G.phase = 'defeat';
-        renderG();
-      }
-    }
-
-    function getConf() {
-      const s = Object.values(G.scores).sort((a, b) => b - a);
-      return s.length ? Math.min(100, s[0] - (s[1] || 0) + 20) : 0;
-    }
-
-    window.startG = startG;
-    window.answerG = answerG;
-    window.resultG = resultG;
-    window.initGenie = initGenie;
 
     render();
   </script>
